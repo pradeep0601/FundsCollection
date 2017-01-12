@@ -16,7 +16,7 @@
 <script type="text/javascript" src="resources/js/lib/bootstrap.min.js"></script>-->
 <script type="text/javascript" src="resources/js/lib/angular-route.min.js"></script>
  
-<script type="text/javascript" src="resources/js/main.js"></script>
+<script type="text/javascript" src="resources/js/userApp.js"></script>
 <script type="text/javascript" src="resources/js/controller/funds_controller.js"></script>
 <script type="text/javascript" src="resources/js/controller/userController.js"></script>
 <script type="text/javascript" src="resources/js/controller/registerController.js"></script>
@@ -36,7 +36,7 @@
       <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
 <!-- new scripts ends -->
 </head>
-<body data-ng-app="mainApp" bgcolor="grey" data-ng-controller="userController">
+<body data-ng-app="userApp" bgcolor="grey" data-ng-controller="userController">
 
 <nav class="navbar navbar-default">	
 	<div class="container-fluid">
