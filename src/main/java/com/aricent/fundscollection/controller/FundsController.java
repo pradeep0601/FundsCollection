@@ -1,0 +1,107 @@
+package com.aricent.fundscollection.controller;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.aricent.fundscollection.model.Expenditure;
+import com.aricent.fundscollection.model.FundCycle;
+import com.aricent.fundscollection.model.FundsRecord;
+import com.aricent.fundscollection.model.Report;
+import com.aricent.fundscollection.service.FundService;
+import com.aricent.fundscollection.util.FundUtil.Records;
+
+@Controller
+@RequestMapping("/funds")
+public class FundsController {
+
+	@Autowired
+	private FundService fundService;
+
+	@RequestMapping(value = "/startFundCycle", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean startFunding(@RequestBody FundCycle fundCycle) {
+
+		System.out.println(fundCycle);
+
+		boolean result = fundService.startFundCycle(fundCycle);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/stopFundCycle", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<HttpStatus> stopFunding(@RequestBody FundCycle fundCycle) {
+
+		System.out.println(fundCycle);
+		try {
+			fundService.stopFundCycle(fundCycle);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception exception) {
+           return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@RequestMapping(value = "/fundDetails", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<Map<Records, Object>> getFundDetails() {
+
+		Map<Records, Object> fundDetails = fundService.getFundDetails();
+
+		if (fundDetails == null) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<>(fundDetails, HttpStatus.OK);
+
+	}
+
+	@RequestMapping(value = "/addFunds", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<Boolean> addFunds(@RequestBody FundsRecord fundsRecord) {
+
+		try {
+			fundService.addFunds(fundsRecord);
+
+			return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+		} catch (Exception exception) {
+			return new ResponseEntity<Boolean>(false, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@RequestMapping(value = "/expenditure", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<HttpStatus> addExpenditure(@RequestBody Expenditure expenditure) {
+
+		System.out.println(expenditure);
+		try {
+			fundService.addExpenditure(expenditure);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception exception) {
+           return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@RequestMapping(value = "/reports", method = RequestMethod.POST)
+	public ResponseEntity<List<FundsRecord>> getReport(@RequestBody Report report){
+		
+		System.out.println(report);
+		
+		List<FundsRecord> reports = fundService.getReport(report);
+		
+		if(reports == null || reports.size() == 0){
+			return new ResponseEntity<List<FundsRecord>>(reports, HttpStatus.NO_CONTENT);
+		}
+		else{
+			return new ResponseEntity<List<FundsRecord>>(reports, HttpStatus.OK);
+		}
+	}
+
+}

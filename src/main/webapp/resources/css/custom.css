@@ -1,0 +1,210 @@
+
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+  	background: url('../images/black_lozenge.png') repeat;
+}
+
+.brand-name {
+	font-family: 'Tillana';
+}
+.btn-signup {
+	font-family: 'Tillana';
+}
+
+.btn-login {
+	font-family: 'Tillana';
+}
+/* #FileUploadModal {
+	margin-top:100px;
+} */
+.gallery {
+  color: #fff;
+}
+.gallery h2 {
+  font-family: 'Yesteryear', arial, helvetica, sans;
+  color: #eee;
+  margin-bottom: 15px;
+  font-size: 4.5em;
+  font-weight: 200;
+  line-height: 1.65em;
+  border-bottom: 1px solid #000;
+  text-shadow: 3px 4px 0px rgba(0, 0, 0, 0.76);
+}
+#RegisterSuccessModal{
+	margin-top:200px;
+}
+#AlbumSuccessModal{
+	margin-top:200px;
+}
+/* .navbar {
+    position: relative;
+    min-height: 65px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+} */
+.btn-create-album {
+	font-family: 'Tillana';
+    font-size: 20px;
+}
+.back-to-albums {
+	font-family: 'Tillana';
+    font-size: 20px;
+}
+.navbar-default {
+    background-color: #F88017;
+    border-color: #e7e7e7;
+}
+
+/* .nav {
+    padding-left: 5;
+    margin-bottom: 0;
+    list-style: none;
+}
+*/
+
+.dropdown-menu {
+    width: 200px;
+}
+
+.footer{
+	color:#1271c3;
+}
+/* .navbar-nav {
+    float: left;
+    margin: 5;
+    padding-top:5px;
+}  */
+.navbar-default .navbar-nav>li>a {
+    color: #fff;
+}
+.back-to-albums {
+    color: #ffffff;
+    text-decoration: none;
+}
+.album-thumbnail h4 {
+	font-family: 'Tillana';
+}
+
+.navbar .nav > li>a {
+ border-top-left-radius: 6px !important;
+border-bottom-left-radius: 6px !important;
+ border-top-right-radius: 6px !important;
+border-bottom-right-radius: 6px !important;
+}
+.navbar-brand {
+    float: left;
+    height: 50px;
+    padding: 5px 5px;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.navbar-collapse {
+
+	font-family: Allan;
+	font-size:16pt;
+	font-weight: bold;
+}
+
+a.user:before {
+    content: ' ';
+    position: absolute;
+    height: 40px;
+    top: 0;
+    width: 1px;
+    background: #eaeaec;
+}
+
+.btn-circle.btn-lg {
+  width: 50px;
+  height: 50px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 25px;
+}
+
+.btn-default:hover {
+	color: #fff;
+    background-color: #F88017;
+    border-color: #285e8e;
+}
+.login-form{
+	margin-top: 100px;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+.funds_body{
+	background-color: white;
+}
+.fund-modal-body {
+    position: relative;
+    padding: inherit;
+}
+.fund-modal-footer {
+    padding: 15px;
+    text-align: center;
+    border-top: 1px solid #e5e5e5;
+}
+
+.custom-btn-justified {
+    display: table;
+    table-layout: fixed;
+    border-collapse: separate;
+    padding-top: 30px;
+}
+.btn-group-justified {
+    display: table;
+    width: 83%;
+    table-layout: fixed;
+    border-collapse: separate;
+    padding-top: 33px;
+}
+
+fieldset.scheduler-border {
+    border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+            box-shadow:  0px 0px 0px 0px #000;
+}
+
+/* legend.scheduler-border {
+    font-size: 1.2em !important;
+    font-weight: bold !important;
+    text-align: left !important;
+
+} */
+legend.scheduler-border {
+    width:inherit; /* Or auto */
+    padding:0 10px; /* To give a bit of padding on the left and right */
+    border-bottom:none;
+}
+.datepickerdemo md-content {
+            padding-bottom: 200px; 
+         }
+.datepickerdemo .validation-messages {
+            font-size: 11px;
+            color: darkred;
+            margin: 10px 0 0 25px; 
+         }

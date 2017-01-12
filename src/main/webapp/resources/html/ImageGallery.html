@@ -1,0 +1,38 @@
+<!-- Page Content -->
+<div class="container gallery" data-ng-controller="albumGalleryController">
+
+	<div class="row">
+		<div class="col-lg-12">
+			<h2>{{album}}
+				<a data-ng-href="#/gallery" class="back-to-albums pull-right">Back to Albums</a>
+			</h2>
+		</div>
+		<span class="text-danger" data-ng-show="!images.length">No Images to View</span>
+
+		<div class="col-lg-2 col-md-3 col-xs-4"
+			data-ng-repeat="image in images">
+			<a href=""> <img class="img-responsive thumbnail" width="200" height="200" 
+			data-ng-src="http://localhost:8080/FundsCollection/resources/albums/{{album}}/{{image}}" data-ng-click="openPhotoBrowseModal(album,image,images)" alt="{{image}}">
+			</a>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="photo-browse-modal" role="dialog" data-ng-controller="albumGalleryController">
+	<div class="modal-dialog modal-lg">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+
+			<div class="modal-body">
+				<img id="imageModal"/>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="">OK</button>
+				<button id="previous-btn" type="button" class="btn btn-default pull-left" data-ng-click="previousPhoto(album,images)" ng-enabled="true">Previous</button>
+				<button id="next-btn" type="button" class="btn btn-default" data-ng-click="nextPhoto(album,images)" ng-enabled="true">Next</button>
+			</div>
+		</div>
+
+	</div>
+</div>

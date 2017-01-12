@@ -1,0 +1,222 @@
+<div class="row container-fluid">
+	<div class="col-md-12">
+		<div class="row">
+			<div class="col-md-5">
+				<div class="panel panel-primary">
+					<div class="panel-heading text-center">Fund Cycle Status</div>
+					<div class="panel-body">
+						<div class="col-md-12">
+							<div class="col-md-6">Start Date :</div>
+							<div class="col-md-6">
+								<label>{{fundDetails.FUNDCYCLE.startDate | date :
+									'dd-MMM-y'}}</label>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-6">Amount/Person :</div>
+							<div class="col-md-6">
+								<label>{{fundDetails.FUNDCYCLE.sharePerPerson}}</label>
+							</div>
+						</div>
+					</div>
+					<div class="panel-footer">
+
+						<div class="progress">
+							<div class="col-md-12">
+								<div class="col-md-2">Status :</div>
+								<div class="col-md-10">
+									<div
+										class="progress-bar progress-bar-success progress-bar-striped active"
+										role="progressbar" aria-valuenow="100" aria-valuemin="0"
+										aria-valuemax="100" style="width: 100%">In Progress</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-md-1"></div>
+			<div class="col-md-5">
+				<div class="panel panel-primary">
+					<div class="panel-heading text-center">Start/End Fund Cycle</div>
+					<div class="panel-body">
+						<div class="col-md-12">
+							<div class="col-md-offset-2 col-md-3">
+								<button type="button" class="btn btn-info btn-sm"
+									data-toggle="modal" data-target="#startCycle">Start
+									Fund Cycle</button>
+
+							</div>
+							<div class="col-md-3 col-md-offset-3 ">
+								<button type="button" class="btn btn-info btn-sm"
+									data-toggle="modal" data-target="#stopCycle">Stop Fund
+									Cycle</button>
+
+							</div>
+
+						</div>
+					</div>
+					<div class="panel-footer"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="row">
+			<div class="panel panel-info">
+				<div class="panel-heading text-center">Add Funds</div>
+				<div class="panel-body">
+					<div class="table-responsive">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>Employee ID</th>
+									<th>Name</th>
+									<th>Cycle Start Date</th>
+									<th>Current Cycle Share</th>
+									<th>Previous Balance</th>
+									<th>Total Amount to be paid</th>
+									<th>Amount Paid</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><select class="form-control"
+										data-ng-model="fundsRecord"
+										data-ng-options="fundRecord.employee.userName for fundRecord in fundDetails.FUNDRECORDS"></select>
+									</td>
+									<td>{{fundsRecord.employee.firstName}}</td>
+									<td>{{fundsRecord.fundCycle.startDate | date :
+										'dd-MMM-y'}}</td>
+									<!-- <td>{{fundsRecord.fundsCycle.startDate | date : "fullDate"}}</td> -->
+									<td>{{fundsRecord.fundCycle.sharePerPerson}}</td>
+									<td>{{fundsRecord.amountRemained}}</td>
+									<td>{{fundsRecord.amountNeedToPay}}</td>
+									<td><input type="text" class="form-control"
+										data-ng-model="fundsRecord.actualPaidAmount"></td>
+									<td><button class="btn-sm btn-primary"
+											data-ng-click="addFunds(fundsRecord)">
+											Add <span class="glyphicon glyphicon-plus"></span>
+										</button></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="panel-footer">
+					<h5>*(-) sign means balance and (+) sign means loan</h5>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="row">
+			<div class="panel panel-info">
+				<div class="panel-heading text-center">Fund Details</div>
+				<div class="panel-body">
+					<div class="table-responsive">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>Employee ID</th>
+									<th>Name</th>
+									<th>Payment Date</th>
+									<th>Amount Paid</th>
+									<th>Amount Remained</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr
+									data-ng-repeat="paidFundRecord in fundDetails.PAIDFUNDRECORDS">
+									<td>{{paidFundRecord.employee.userName}}</td>
+									<td>{{paidFundRecord.employee.firstName}}</td>
+									<td>{{paidFundRecord.payDate | date : "fullDate"}}</td>
+									<td>{{paidFundRecord.actualPaidAmount}}</td>
+									<td>{{paidFundRecord.amountRemained}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="panel-footer"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- start fund cycle Modal -->
+<div id="startCycle" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-sm">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title text-center">Fund Cycle Details</h4>
+			</div>
+			<div class="fund-modal-body form-horizontal">
+				<div class="form-group">
+					<label class="control-label col-sm-4">Start Date :</label>
+					<div class="col-sm-7">
+						<input type="date" data-ng-model="fundsCycle.startDate"
+							class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-4">Amount/Person</label>
+					<div class="col-sm-7">
+						<input type="text" data-ng-model="fundsCycle.sharePerPerson"
+							class="form-control" />
+					</div>
+				</div>
+
+			</div>
+			<div class="fund-modal-footer">
+				<button type="button" class="btn btn-info btn-sm"
+					data-dismiss="modal" data-ng-click="startFundCycle()">Start
+					Fund Cycle</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- start fund cycle modal ends here -->
+<!-- stop fund cycle Modal -->
+<div id="stopCycle" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-sm">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title text-center">Fund Cycle Details</h4>
+			</div>
+			<div class="fund-modal-body form-horizontal">
+				<div class="form-group">
+					<label class="control-label col-sm-4">Start Date :</label>
+					<div class="col-sm-7">
+						<label>{{fundDetails.FUNDCYCLE.startDate | date :
+							'dd-MMM-y'}}</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-4">Amount/Person</label>
+					<div class="col-sm-7">
+						<label>{{fundDetails.FUNDCYCLE.sharePerPerson}}</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-4">End Date :</label>
+					<div class="col-sm-7">
+						<input type="date" data-ng-model="fundDetails.FUNDCYCLE.endDate"
+							class="form-control" />
+					</div>
+				</div>
+			</div>
+			<div class="fund-modal-footer">
+				<button type="button" class="btn btn-info btn-sm"
+					data-dismiss="modal"
+					data-ng-click="stopFundCycle(fundDetails.FUNDCYCLE)">Stop
+					Fund Cycle</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- stop fund cycle modal ends here -->

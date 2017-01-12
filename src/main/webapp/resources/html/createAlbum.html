@@ -1,0 +1,147 @@
+<div class="container gallery" data-ng-controller="albumController">
+	<div class="row">
+		<div class="col-lg-12">
+			<h2>Gallery
+				<input type="button" class="btn btn-danger pull-right btn-create-album" id="createAlbum" value="Create Album" onclick="openModal()" />
+			</h2>
+		</div>
+		<div>
+			<span data-ng-show="!albums.length">No Albums to Preview</span>
+			 <div class="col-lg-2 col-md-3 col-xs-4" data-ng-repeat="album in albums">
+                <a class="thumbnail">
+                    <img class="img-responsive" data-ng-click="loadAlbumImages(album.name)" data-ng-src="http://localhost:8080/FundsCollection/resources/albums/{{album.name}}/{{album.albumThumbnail}}" alt="">
+                 </a>
+                 <button type="button" class="btn btn-danger pull-right" data-ng-click="initiateDelete(album)"><span class="glyphicon glyphicon-remove"></span></button>
+                
+                    <div class="card-block album-thumbnail">
+						<h4 class="card-title">{{ album.name }}</h4>
+						<p class="card-text">{{ album.description }}</p>
+						<p class="card-text">
+							<small class="text-muted">Last updated 3 mins ago</small>
+						</p>
+					</div>
+					<!-- Ablbum Delete Confirmation  Modal -->
+				<div class="modal fade" id="{{album.albumId}}AlbumDeleteModal" role="dialog" data-ng-controller="albumController">
+					<div class="modal-dialog modal-sm">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+
+							<div class="modal-body">
+								<p class="text-danger">
+									<b>Are you Sure you want to Delete The Album :  {{album.name}}?</b>
+								</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+								<button type="button" class="btn btn-danger" data-ng-click="deleteAlbum(album)">Delete</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+</div>
+
+
+	<div class="modal fade" id="FileUploadModal" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header" style="text-align: center">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4>
+						<span class="glyphicon glyphicon-picture"></span> Create a new Album
+					</h4>
+				</div>
+				<form method="post" data-ng-submit="uploadFiles(album)" name="createAlbumForm">
+				<div class="modal-body">
+					<div class="container-fluid bd-example-row">
+						<div class="row">
+							<div class="col-md-8 col-md-offset-2">
+								
+									<div class="form-group">
+										<label for="album-name">Album Name<span	class="text-danger">*</span></label>
+										<input type="text"	class="form-control" name="albumName" data-toggle="popover" data-trigger="focus" data-placement="right" data-content="It's so simple to create a tooltop for my website!" data-ng-model="album.name" data-ng-required="true" data-ng-pattern='/^[^\\/?%*:|\"<>\.]+$/' />
+										<span class="text-danger" data-ng-show="createAlbumForm.albumName.$error.pattern">Enter a Valid Album Name</span>
+										<span class="text-danger" data-ng-show="createAlbumForm.albumName.$error.required && createAlbumForm.albumName.$touched">Album Name is Required</span>
+									</div>
+									<div class="form-group">
+										<label for="album-description">Description</label>
+										<textarea name="albumDescription" class="form-control"	data-ng-model="album.description"></textarea>
+										</div>
+									<div class="row">
+										<div class="col-md-4">
+											<div class="control-group">
+												<div class="controls">
+													<span class="btn btn-success btn-file"> 
+													<span class="glyphicon glyphicon-plus"> 
+													</span> <input type="file" name="file" data-ng-files="album.files"	onchange="previewFile()" multiple><span> Add Photos...</span>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<span class="preview-area" style="overallflow-x:scroll" data-ng-model="preview"></span>
+	
+									<div class="progress" data-ng-show="percentage">
+									<div class="progress-bar progress-bar-success" aria-valuemin="0" aria-valuemax="100" style='width: {{percentage}} %'></div>
+								</div>
+								<div>
+									<span data-ng-show="!album.files.length">No files selected</span>
+									<!-- <ul>
+										<li data-ng-repeat="file in album.files">{{file.name}}</li>
+									</ul> -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-ng-click="clearFiles(album)" data-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-primary" data-ng-disabled="createAlbumForm.$invalid">Save</button>
+			</div>
+			</form>
+		</div>
+		</div>
+	</div>
+
+<!-- Ablbum Sucess Modal -->
+<div class="modal fade" id="AlbumSuccessModal" role="dialog">
+	<div class="modal-dialog modal-sm">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+
+			<div class="modal-body">
+				<p class="text-success"><b>Album Created Successfully...</b></p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="">OK</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+<!-- Ablbum Sucess Modal -->
+<div class="modal fade" id="AlbumDeleteSuccessModal" role="dialog">
+	<div class="modal-dialog modal-sm">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+
+			<div class="modal-body">
+				<p class="text-success"><b>Your Album Deleted Successfully...</b></p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="">OK</button>
+			</div>
+		</div>
+
+	</div>
+</div>
