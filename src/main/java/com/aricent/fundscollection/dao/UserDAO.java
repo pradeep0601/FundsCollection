@@ -4,7 +4,7 @@ import com.aricent.fundscollection.model.Employee;
 
 public interface UserDAO {
 
-	public boolean login(String userName, String password);
+	public boolean login(Long userName, String password);
 	
 	public boolean registerEmployee(Employee emp);
 	

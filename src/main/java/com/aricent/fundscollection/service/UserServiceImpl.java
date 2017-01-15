@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService{
 	    this.userDAO = userDAO;
 	}
 	@Override
-	public boolean login(String userName, String password) {
+	public boolean login(Long userName, String password) {
 		
 		return userDAO.login(userName, password);
 	}

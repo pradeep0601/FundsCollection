@@ -44,13 +44,13 @@
 						<div class="col-md-12">
 							<div class="col-md-offset-2 col-md-3">
 								<button type="button" class="btn btn-info btn-sm"
-									data-toggle="modal" data-target="#startCycle">Start
+									data-toggle="modal" data-target="#startCycle" data-ng-disabled = {{fundDetails.FUNDCYCLE.isInProgress}}>Start
 									Fund Cycle</button>
 
 							</div>
 							<div class="col-md-3 col-md-offset-3 ">
 								<button type="button" class="btn btn-info btn-sm"
-									data-toggle="modal" data-target="#stopCycle">Stop Fund
+									data-toggle="modal" data-target="#stopCycle" data-ng-disabled = {{!fundDetails.FUNDCYCLE.isInProgress}}>Stop Fund
 									Cycle</button>
 
 							</div>
@@ -66,6 +66,7 @@
 		<div class="row">
 			<div class="panel panel-info">
 				<div class="panel-heading text-center">Add Funds</div>
+				<form name="fundForm">
 				<div class="panel-body">
 					<div class="table-responsive">
 						<table class="table table-bordered">
@@ -82,9 +83,21 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td><select class="form-control"
+								<td data-ng-class = "{
+									'has-error': fundForm.uName.$touched && fundForm.uName.$error.required,
+									'has-success': fundForm.uName.$valid
+									}"
+									>
+									<select class="form-control"
 										data-ng-model="fundsRecord"
-										data-ng-options="fundRecord.employee.userName for fundRecord in fundDetails.FUNDRECORDS"></select>
+										data-ng-options="fundRecord.employee.userName for fundRecord in fundDetails.FUNDRECORDS" 
+										name="uName"
+										data-ng-required = "true">
+									</select>
+									<span class = "help-block"
+										data-ng-show = "fundForm.uName.$touched && fundForm.uName.$error.required">
+										Employee ID shouldn't be blank.
+									</span>
 									</td>
 									<td>{{fundsRecord.employee.firstName}}</td>
 									<td>{{fundsRecord.fundCycle.startDate | date :
@@ -93,10 +106,24 @@
 									<td>{{fundsRecord.fundCycle.sharePerPerson}}</td>
 									<td>{{fundsRecord.amountRemained}}</td>
 									<td>{{fundsRecord.amountNeedToPay}}</td>
-									<td><input type="text" class="form-control"
-										data-ng-model="fundsRecord.actualPaidAmount"></td>
+									<td data-ng-class = "{
+									'has-error': fundForm.pAmount.$touched && fundForm.pAmount.$error.required,
+									'has-success': fundForm.pAmount.$valid
+									}"
+									>
+									<input type="text" class="form-control"
+									    placeholder="Enter Actual paid amount"
+										data-ng-model="fundsRecord.actualPaidAmount"
+										name = "pAmount"
+										data-ng-required = "true"/>
+										<span class = "help-block"
+										data-ng-show = "fundForm.pAmount.$touched && fundForm.pAmount.$error.required">
+										Paid amount shouldn't be blank.
+										</span>
+									</td>
 									<td><button class="btn-sm btn-primary"
-											data-ng-click="addFunds(fundsRecord)">
+											data-ng-click="addFunds(fundsRecord)"
+											data-ng-disabled = "fundForm.$invalid">
 											Add <span class="glyphicon glyphicon-plus"></span>
 										</button></td>
 								</tr>
@@ -104,6 +131,7 @@
 						</table>
 					</div>
 				</div>
+				</form>
 				<div class="panel-footer">
 					<h5>*(-) sign means balance and (+) sign means loan</h5>
 				</div>
@@ -149,6 +177,7 @@
 	<div class="modal-dialog modal-sm">
 		<!-- Modal content-->
 		<div class="modal-content">
+		<form name="startForm">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title text-center">Fund Cycle Details</h4>
@@ -156,25 +185,35 @@
 			<div class="fund-modal-body form-horizontal">
 				<div class="form-group">
 					<label class="control-label col-sm-4">Start Date :</label>
-					<div class="col-sm-7">
+					<div class="col-sm-7"  data-ng-class = "{
+					'has-error': startForm.sDate.$touched && startForm.sDate.$invalid, 
+					'has-success' : startForm.sDate.$valid}">
 						<input type="date" data-ng-model="fundsCycle.startDate"
-							class="form-control" />
+							class="form-control" placeholder="mm/dd/yyyy" name = "sDate" data-ng-required = "true"/>
+							<span class = "help-block" data-ng-show = "startForm.sDate.$touched && startForm.sDate.$error.required">Start Date is required.</span>
+							<!-- <span class = "help-block" data-ng-show = "startForm.sDate.$error.pattern">Invalid date, it should be in format of 'mm/dd/yyyy'</span> -->
 					</div>
 				</div>
+				<!-- class="form-control" placeholder="mm/dd/yyyy" name = "sDate" data-ng-required = "true" data-ng-pattern = "/^(0?[1-9]|1[012]){1,2}/(0?[1-9]|[12][0-9]|3[01]){1,2}/((19|20)\\d\\d){4,4}$/"/> -->
 				<div class="form-group">
 					<label class="control-label col-sm-4">Amount/Person</label>
-					<div class="col-sm-7">
+					<div class="col-sm-7"  data-ng-class = "{
+					'has-error': startForm.spp.$error.pattern || startForm.spp.$touched && startForm.spp.$invalid, 
+					'has-success' : startForm.spp.$valid}">
 						<input type="text" data-ng-model="fundsCycle.sharePerPerson"
-							class="form-control" />
+							class="form-control"  name = "spp" data-ng-required = "true" data-ng-pattern = "/^\d+(\.\d{1,2})?$/"/>
+							<span class = "help-block" data-ng-show = "startForm.spp.$touched && startForm.spp.$error.required">Amount is required.</span>
+							<span class ="help-block" data-ng-show = "startForm.$error.pattern">Invalid Amount!</span>
 					</div>
 				</div>
 
 			</div>
 			<div class="fund-modal-footer">
 				<button type="button" class="btn btn-info btn-sm"
-					data-dismiss="modal" data-ng-click="startFundCycle()">Start
+					data-dismiss="modal" data-ng-click="startFundCycle()" data-ng-disabled = "startForm.$invalid">Start
 					Fund Cycle</button>
 			</div>
+			</form>
 		</div>
 	</div>
 </div>
@@ -184,6 +223,7 @@
 	<div class="modal-dialog modal-sm">
 		<!-- Modal content-->
 		<div class="modal-content">
+		<form name = "endForm">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title text-center">Fund Cycle Details</h4>
@@ -204,18 +244,23 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-4">End Date :</label>
-					<div class="col-sm-7">
+					<div class="col-sm-7" data-ng-class = "{
+					'has-error':endForm.eDate.$touched && endForm.eDate.$invalid,
+					'has-success':endForm.eDate.$invalid
+					}">
 						<input type="date" data-ng-model="fundDetails.FUNDCYCLE.endDate"
-							class="form-control" />
+							class="form-control" name="eDate" data-ng-required = "true"/>
+							<span class = "help-block" data-ng-show = "endForm.eDate.$touched && endForm.eDate.$error.required">End Date is required.</span>
 					</div>
 				</div>
 			</div>
 			<div class="fund-modal-footer">
 				<button type="button" class="btn btn-info btn-sm"
 					data-dismiss="modal"
-					data-ng-click="stopFundCycle(fundDetails.FUNDCYCLE)">Stop
+					data-ng-click="stopFundCycle(fundDetails.FUNDCYCLE)" data-ng-disabled = "endForm.$invalid">Stop
 					Fund Cycle</button>
 			</div>
+			</form>
 		</div>
 	</div>
 </div>
