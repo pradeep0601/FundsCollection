@@ -9,7 +9,6 @@ app.factory("userService",["$http","$q", function($http, $q){
 						return successResp.data;
 					},
 					function(errResp){
-						console.error("Error while login");
 						return $q.reject(errResp);
 					}
 					);
@@ -19,6 +18,7 @@ app.factory("userService",["$http","$q", function($http, $q){
 			return $http.post("http://localhost:8080/FundsCollection/user/register", employee)
 			.then(
 					function(successResp){
+						
 						return successResp.data;
 					},
 					function(errResp){

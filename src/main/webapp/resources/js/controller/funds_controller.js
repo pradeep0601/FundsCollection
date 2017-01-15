@@ -2,7 +2,7 @@
 
 app.controller("fundsController", ["$scope","fundsService","$location",function($scope,fundsService,$location){
 
-	$scope.fundsCycle = {"startDate" : new Date(), "endDate" : "", "sharePerPerson" : ""};
+	$scope.fundsCycle = {"startDate" : "", "endDate" : "", "sharePerPerson" : ""};
 	$scope.startFundCycle = function (){
 		console.log($scope.fundsCycle);
 		fundsService.startFundCycle($scope.fundsCycle)

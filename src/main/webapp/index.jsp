@@ -36,7 +36,7 @@
       <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
 <!-- new scripts ends -->
 </head>
-<body data-ng-app="userApp" bgcolor="grey" data-ng-controller="userController">
+<body id="parent" data-ng-app="userApp" bgcolor="grey" data-ng-controller="userController">
 
 <nav class="navbar navbar-default">	
 	<div class="container-fluid">
@@ -75,7 +75,8 @@
 	</div>
  </div>
 </nav>
-<div data-ng-view></div>
+<div data-ng-view>
+</div>
 </body>
 
 <!-- Footer -->

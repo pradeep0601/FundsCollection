@@ -1,29 +1,29 @@
 'use strict';
 
-app.controller("userController", ["$scope","userService","$location",function($scope,userService,$location){
+app.controller("userController", ["$scope","userService","$location","$window",function($scope,userService,$location,$window){
 
 	$scope.employee = {"firstName" : "", "lastName" : "", "contact" : "", "email" : "", "dob" : "", "gender" : "",
 						"userName" : "", "passWord" : "", "confirmPassword" : ""};
 	$scope.registrationForm = { };
-	
-	$scope.login = function(employee){
-		fundsService.login(employee)
+	  
+	$scope.login = function(){
+		userService.login($scope.employee)
 		.then(
 				function(successResp){
-					console.log("successResp = "+successResp);
-					
-					successResp == true ? $location.path("/success") : $location.path("/fail");
+					var $homeUrl = "http://" + $window.location.host + "/FundsCollection/home.jsp";
+					$window.location.href = $homeUrl;
 					
 				},
 				function(errResp){
+					console.error("Error while login");
 					console.log("errResp = "+errResp);
 					$location.path("/error");
 				}
 				);
-	};
+	}
 	
 	$scope.register = function(employee){
-		fundsService.register(employee)
+		userService.register(employee)
 		.then(
 				function(successResp){
 					console.log("successResp = " + successResp);

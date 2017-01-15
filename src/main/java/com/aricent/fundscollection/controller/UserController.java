@@ -1,8 +1,8 @@
 package com.aricent.fundscollection.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,22 +29,26 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(HttpServletRequest request) {
-
-		boolean isAuthenticated = false;
+	@ResponseBody
+	public ResponseEntity<HttpStatus> login(@RequestBody Employee employee) {
 		
-		if(request != null){
-			String userName = request.getParameter("userName");
-			String password = request.getParameter("passWord");
+		boolean isAuthenticated = false;
+		if(employee != null){
+			Long userName = employee.getUserName();
+			String password = employee.getPassWord();
 			
 			isAuthenticated = userService.login(userName, password);
-			
 		}
+		ResponseEntity<HttpStatus> resp = isAuthenticated ? new ResponseEntity<HttpStatus>(HttpStatus.OK) : new ResponseEntity<HttpStatus>(HttpStatus.UNAUTHORIZED); 
 		
-		return isAuthenticated ? HOME_PAGE :  ERROR_PAGE;
+		return resp;
 	}
-	
-	
+
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public String displayHome() {
+		return HOME_PAGE;
+	}
+
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean register(@RequestBody Employee emp) {
