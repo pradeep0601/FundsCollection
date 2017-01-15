@@ -19,7 +19,7 @@
 <!-- <script type="text/javascript" src="resources/js/lib/angular-min.js"></script>-->
 <script type="text/javascript" src="../resources/js/lib/angular-route.min.js"></script>
 <!-- <script type="text/javascript" src="resources/js/lib/bootstrap.min.js"></script>-->
-<script type="text/javascript" src="../resources/js/main.js"></script>
+<script type="text/javascript" src="../resources/js/fundsApp.js"></script>
 <script type="text/javascript" src="../resources/js/controller/funds_controller.js"></script>
 <script type="text/javascript" src="../resources/js/service/funds_service.js"></script>
 <script type="text/javascript" src="../resources/js/controller/fundsMainCtrl.js"></script>
@@ -27,7 +27,7 @@
 <!-- <link rel="stylesheet" href="resources/css/bootstrap.min.css">-->
 <link rel="stylesheet" href="../resources/css/custom.css">
 </head>
-<body data-ng-app="mainApp">
+<body data-ng-app="fundsApp">
 
 	<nav class="navbar navbar-default">
 	<div class="container-fluid">
