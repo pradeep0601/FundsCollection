@@ -27,7 +27,7 @@ public class UserDAOImpl implements UserDAO{
         this.entityManager = entityManager;
     }
     
-	public boolean login(String userName, String password) {
+	public boolean login(Long userName, String password) {
 		boolean isValid = false;
 		
 		Employee employee = entityManager.find(Employee.class, Long.valueOf(userName));

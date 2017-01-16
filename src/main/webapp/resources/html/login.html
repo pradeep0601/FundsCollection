@@ -5,16 +5,20 @@
           <h2><span class="glyphicon glyphicon-log-in"></span> Login</h2>
         </div>
         <div class="modal-body">
-          <form role="form" method="post" action="user/login">
-            <div class="form-group">
-              <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
-              <input type="text" class="form-control" name = "userName" placeholder="Enter User Name">
+         <form name = "userForm">
+              <div class="form-group has-feedback" data-ng-class="{'has-error': userForm.uName.$error.pattern || userForm.uName.$error.maxlength || (userForm.uName.$error.required && userForm.uName.$touched),'has-success': userForm.uName.$valid,'has-feedback': userForm.uName.$valid }">
+              <label for="usrname"><span class="glyphicon glyphicon-user"></span> UserName</label>
+              <input type="text" class="form-control" data-ng-model = "employee.userName" placeholder="Enter User Name" name="uName" data-ng-pattern="/^[0-9]+$/" data-ng-maxlength="10" data-ng-required="true"/>
+              <span data-ng-show="userForm.uName.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+			  <span class="help-block" data-ng-show="userForm.uName.$error.pattern || userForm.uName.$error.maxlength">UserName <strong claas="text-danger">MUST</strong> be in digits and should not exceed 10 digits.</span>
+            <span class="help-block" data-ng-show="userForm.uName.$error.required && userForm.uName.$touched">UserName shouldn't be blank.</span>
             </div>
-            <div class="form-group">
+            <div class="form-group" data-ng-class ="{'has-error': userForm.pwd.$invalid && userForm.pwd.$touched, 'has-success':userForm.pwd.$valid}">
               <label for="psw"><span class="glyphicon glyphicon-lock"></span> Password</label>
-              <input type="password" class="form-control" name = "passWord" placeholder="Enter password">
+              <input type="password" class="form-control" data-ng-model = "employee.passWord" placeholder="Enter password" name = "pwd" data-ng-required="true"/>
+              <span class="help-block" data-ng-show="userForm.pwd.$invalid && userForm.pwd.$touched">password field shouldn't be blank.</span>
             </div>
-              <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+              <button type="submit" class="btn btn-success btn-block" data-ng-click = "login()" data-ng-disabled="userForm.$invalid"><span class="glyphicon glyphicon-off"></span> Login</button>
           </form>
         </div>
         <div class="modal-footer">

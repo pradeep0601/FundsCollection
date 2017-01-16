@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module("userApp",["ngRoute",'ngMaterial','ngMessages']);
+var app = angular.module("userApp",["ngRoute",'ngMaterial','ngMessages','ngAnimate']);
 
 
 app.config(function($routeProvider) {

@@ -4,7 +4,7 @@
 		<div class="panel panel-info">
 			<div class="panel-heading text-center">View Report</div>
 			<div class="panel-body">
-				<form class="form-inline">
+				<form class="form-inline" name="rForm">
 				   <div class="form-group">
                     <fieldset class="scheduler-border">
                       <legend class="scheduler-border">Report By</legend>
@@ -17,14 +17,41 @@
 						<select class = "form-control" data-ng-model = "reportInput.employee" data-ng-options = "employee.userName for employee in fundDetails.EMPLOYEES"></select>
 					</div>
 					<div class="form-group">
-						<label>From Date:</label> 
-						<input type="date" class="form-control" data-ng-model = "reportInput.fromDate">
+						<label>From Date:</label>
+						 <div data-ng-class = "{
+					          'has-error': rForm.fDate.$touched && rForm.fDate.$error.required,
+					          'has-success': rForm.fDate.$valid
+					       }">
+						<input type="date" 
+						class="form-control" 
+						data-ng-model = "reportInput.fromDate"
+						name = "fDate"
+						data-ng-required = "true"/>
+						<span class = "help-block"
+						      data-ng-show = "rForm.fDate.$touched && rForm.fDate.$error.required">
+						      From Date is required.
+						</span>
+						</div>
 					</div>
 					<div class="form-group">
 						<label for="pwd">To Date:</label> 
-						<input type="date" class="form-control" data-ng-model = "reportInput.toDate">
+						<div data-ng-class = "{
+					          'has-error': rForm.tDate.$touched && rForm.tDate.$error.required,
+					          'has-success': rForm.tDate.$valid
+					       }">
+						<input type="date" 
+						class="form-control" 
+						data-ng-model = "reportInput.toDate"
+						name = "tDate"
+						data-ng-required = "true"/>
+						<span class = "help-block"
+						      data-ng-show = "rForm.tDate.$touched && rForm.tDate.$error.required">
+						      To Date is required.
+						</span>
+						</div>
 					</div>
-					<button type="submit" class="btn btn-default" data-ng-click = "getReport()">View Report <span class="glyphicon glyphicon-search"></span></button>
+					<button class="btn-sm btn-primary" data-ng-click = "getReport()"
+					data-ng-disabled = "rForm.$invalid">View Report <span class="glyphicon glyphicon-search"></span></button>
 				</form>
 			</div>
 			<div class="panel-footer"></div>
