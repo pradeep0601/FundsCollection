@@ -21,8 +21,12 @@ app.config(function($routeProvider) {
 			templateUrl : "/FundsCollection/resources/html/report.html",
 			controller : "fundsController"
 		})
-		.when("/activity", {
-			templateUrl : "/FundsCollection/resources/html/activity.html",
+		.when("/gallery", {
+			templateUrl : "/FundsCollection/resources/html/createAlbum.html",
+			controller : "FileUploadController"
+		})
+		.when("/contact", {
+			templateUrl : "/FundsCollection/resources/html/contactUs.html",
 			controller : "fundsController"
 		})
 		.otherwise({

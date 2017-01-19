@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Home Page</title>
+<title>Funds Collection</title>
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -35,6 +35,7 @@
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
 <!-- new scripts ends -->
+<script type="text/javascript" src="resources/js/headerMenu.js"></script>
 </head>
 <body id="parent" data-ng-app="userApp" bgcolor="grey" data-ng-controller="userController">
 
@@ -52,10 +53,8 @@
 			</div></div>
 		<div class="col-md-9">
 		<div class="collapse navbar-collapse" id="fundsNavbar">
+				FUNDS COLLECTION
 				<ul class="nav navbar-nav">
-					<li><a href="#welcome">Home</a></li>
-					<li><a href="#activity">Activities</a></li>
-					<li><a href="#gallery">Gallery</a></li>
 					<li><a href="#aboutus">About Us</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
@@ -81,10 +80,8 @@
 
 <!-- Footer -->
         <footer class="footer">
-            <div class="row">
-                <div class="col-lg-12">
-                    <span>Copyright &copy; Aricent Technologies 2016</span>
-                </div>
-            </div>
-        </footer>
+      <div class="container">
+        <p class="text-muted">Copyright &copy; Aricent Technologies 2016</p>
+      </div>
+</footer>
 </html>

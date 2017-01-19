@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Home Page</title>
+<title>Funds Collection:Home</title>
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -26,26 +26,42 @@
 <script type="text/javascript" src="resources/js/service/fundsMainService.js"></script>
 <!-- <link rel="stylesheet" href="resources/css/bootstrap.min.css">-->
 <link rel="stylesheet" href="resources/css/custom.css">
+<link href='http://fonts.googleapis.com/css?family=Montserrat|Yesteryear|Tillana|Allan' rel='stylesheet' type='text/css'>
 </head>
 <body data-ng-app="fundsApp">
 
 	<nav class="navbar navbar-default">
 	<div class="container-fluid">
+	<div class="container">
+	<div class="col-md-3">
 		<div class="navbar-header">
-		   <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#fundsNavbar">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-           </button>
+		  <a class="navbar-brand" href="https://www.aricent.com/"><img class="img-rounded" src="resources/images/Aricent_logo.png" alt="" style="width: 150px; height: 40px"></a>
 		</div>
+		</div>
+		<div class="col-md-9">
 		<div class="collapse navbar-collapse" id="fundsNavbar">
 		    <ul class="nav navbar-nav">
 			   <li class="active"><a href="#dashboard">Home</a></li>
-			   <li><a href="#fundsInfo">Funds Information</a></li>
+			   <li><a href="#fundsInfo">Funds</a></li>
 			   <li><a href="#expenditure">Expenditure</a></li>
 			   <li><a href="#report">Report</a></li>
-			   <li><a href="#activity">Activity</a></li>
+			   <li><a href="#activity">Activities</a></li>
+			   <li><a href="#gallery">Gallery</a></li>
+			   <li><a href="#contact">Contact Us</a></li>
 		    </ul>
+		    <ul class="nav navbar-nav navbar-right">
+					<li> <button type="button"
+							class="btn btn-default btn-lg btn-circle dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<span class="glyphicon glyphicon-user"></span>
+						</button>
+						<div class="dropdown-menu"
+							style="padding: 15px; padding-bottom: 15px;">
+
+							<button class="btn btn-default btn-logout" id="btnLogout" type="button"	data-ng-click="startLogin()">LOG OUT</button>
+						</div></li>
+				</ul>
+		</div>
+		</div>
 		</div>
 	</div>
 	</nav>
@@ -54,4 +70,10 @@
 		<div data-ng-view></div>
 	</div>
 </body>
+
+<footer class="footer">
+      <div class="container">
+        <p class="text-muted">Copyright &copy; Aricent Technologies 2016</p>
+      </div>
+</footer>
 </html>
