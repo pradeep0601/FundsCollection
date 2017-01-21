@@ -21,6 +21,10 @@ app.config(function($routeProvider) {
 			templateUrl : "/FundsCollection/resources/html/report.html",
 			controller : "fundsController"
 		})
+		.when("/browseAlbum", {
+			templateUrl : "/FundsCollection/resources/html/ImageGallery.html",
+			controller : "albumController"
+		})
 		.when("/gallery", {
 			templateUrl : "/FundsCollection/resources/html/createAlbum.html",
 			controller : "FileUploadController"

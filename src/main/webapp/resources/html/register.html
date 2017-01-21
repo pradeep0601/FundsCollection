@@ -54,18 +54,18 @@
 					</label>
 					<span class="help-block" data-ng-show="registerForm.gender.$invalid && registerForm.gender.$touched">Select one</span>
 				</div>
-				<div class="form-group has-feedback" data-ng-class="{'has-error': registerForm.user.$error.pattern || registerForm.user.$error.maxlength || registerForm.user.$error.unique || (registerForm.user.$error.required && registerForm.user.$touched),
+				<div class="form-group has-feedback" data-ng-class="{'has-error': registerForm.user.$error.pattern || registerForm.user.$error.maxlength || registerForm.user.$error.uniqueUser || (registerForm.user.$error.required && registerForm.user.$touched),
 							  'has-success': registerForm.user.$valid,'has-feedback': registerForm.user.$valid }">
 					 <div class="input-group">
 						<div class="input-group-addon">
 							<span class="glyphicon glyphicon-user"></span>
 						</div>
-						<input class="form-control" name="user" data-ng-model="employee.userName" placeholder="EmployeeID(This will be your Username)"  data-ng-unique data-ng-pattern="/^[0-9]+$/" data-ng-maxlength="10" type="text" data-ng-required="true"/>
+						<input class="form-control" name="user" data-ng-model="employee.userName" placeholder="EmployeeID(This will be your Username)"  unique-user data-ng-pattern="/^[0-9]+$/" data-ng-maxlength="10" type="text" data-ng-required="true"/>
 					</div>
 					<span data-ng-show="registerForm.user.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
 					<span class="help-block" data-ng-show="registerForm.user.$error.pattern || registerForm.user.$error.maxlength">EmployeeId <strong claas="text-danger">MUST</strong> be in digits and should not exceed 10 digits.</span>
 					<span class="help-block" data-ng-show="registerForm.user.$error.required && registerForm.user.$touched">EmployeeId is <strong>MANDATORY</strong>.</span>
-					<span class="help-block" data-ng-show="registerForm.user.$error.unique">Employee already Exists.</span>
+					<span class="help-block" data-ng-show="registerForm.user.$error.uniqueUser">Employee already Exists.</span>
 					<span class="help-block" data-ng-show="registerForm.user.$pending.unique">Checking Employee already Exists.</span>
 				</div>
 				<div class="form-group" data-ng-class="{'has-error': (registerForm.pass.$touched && registerForm.pass.$error.required) || registerForm.pass.$error.minlength || registerForm.pass.$error.maxlength, 'has-success': registerForm.pass.$valid }">
