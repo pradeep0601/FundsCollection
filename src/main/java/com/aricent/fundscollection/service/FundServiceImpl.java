@@ -14,6 +14,7 @@ import com.aricent.fundscollection.model.FundCycle;
 import com.aricent.fundscollection.model.FundsRecord;
 import com.aricent.fundscollection.model.Report;
 import com.aricent.fundscollection.util.FundUtil.Records;
+
 /**
  * 
  * @author Pradeep
@@ -37,8 +38,8 @@ public class FundServiceImpl implements FundService {
 	}
 
 	@Override
-	public Boolean addFunds(FundsRecord fundsRecord) {
-		
+	public Integer addFunds(FundsRecord fundsRecord) {
+
 		return fundDAO.addFunds(fundsRecord);
 	}
 
@@ -48,13 +49,28 @@ public class FundServiceImpl implements FundService {
 	}
 
 	@Override
-	public Boolean addExpenditure(Expenditure expenditure) {
+	public Integer addExpenditure(Expenditure expenditure) {
 		return fundDAO.addExpenditure(expenditure);
 	}
 
 	@Override
 	public List<FundsRecord> getReport(Report report) {
 		return fundDAO.getReport(report);
+	}
+
+	@Override
+	public boolean updateRecord(FundsRecord updatedFR) {
+		return fundDAO.updateRecord(updatedFR);
+	}
+
+	@Override
+	public boolean updateExpenditure(Expenditure updatedExpnd) {
+		return fundDAO.updateExpenditure(updatedExpnd);
+	}
+
+	@Override
+	public boolean remove(String type, Integer id) {
+		return fundDAO.remove(type, id);
 	}
 
 }

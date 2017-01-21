@@ -86,12 +86,17 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="btn-group-justified col-sm-offset-2 col-sm-10">
-							<a href="#" class="btn btn-primary"
-								data-ng-click="addExpenditure()"
-								data-ng-disabled = "expndForm.$invalid">Add</a>
+							<div class="col-sm-offset-2 col-sm-10">
+								<input type="submit" class="btn btn-primary btn-sm"
+									data-ng-disabled="expndForm.$invalid"
+									data-ng-click = "submit('expenditure')"
+									value="{{!expenditure.expndId? 'Add' : 'Update'}}">
+								<button type="button" data-ng-click="getFundDetails()"
+									class="btn btn-warning btn-sm"
+									data-ng-disabled="expndForm.$pristine">Reset Form
+								</button>
+							</div>
 						</div>
-					</div>
 				</div>
 			</div>
 			</form>
@@ -111,6 +116,7 @@
 									<th>Amount Expended</th>
 									<th>Event Date</th>
 									<th>Description</th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -119,6 +125,10 @@
 									<td>{{expenditure.amountExpended}}</td>
 									<td>{{expenditure.eventDate | date : "fullDate"}}</td>
 									<td>{{expenditure.description}}</td>
+									<td>
+									  <button type="button" data-ng-click="edit('expenditure',expenditure.expndId)" class="btn btn-success custom-width">Edit</button>  
+									  <button type="button" data-ng-really-message="Do you really want to delete it?" data-ng-really-click="remove('expenditure',expenditure.expndId)" class="btn btn-danger custom-width">Remove</button>
+									</td>
 								</tr>
 							</tbody>
 						</table>

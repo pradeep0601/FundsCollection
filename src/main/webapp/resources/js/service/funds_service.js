@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory("fundsService",["$http","$q", function($http, $q){
+fundsApp.factory("fundsService",["$http","$q", function($http, $q){
 	return{
 		
 	    startFundCycle : function(fundCycle){
@@ -61,6 +61,39 @@ app.factory("fundsService",["$http","$q", function($http, $q){
 	},
 	getReport : function(reportParms){
 		return $http.post("http://localhost:8080/FundsCollection/funds/reports", reportParms)
+		.then(
+				function(successResp){
+					return successResp.data;
+				},
+				function(errResp){
+					return $q.reject(errResp);
+				}
+				);
+	} ,
+	updateFR : function(updatedFR){
+		return $http.post("http://localhost:8080/FundsCollection/funds/updateFR", updatedFR)
+		.then(
+				function(successResp){
+					return successResp.data;
+				},
+				function(errResp){
+					return $q.reject(errResp);
+				}
+				);
+	} ,
+	updateExpnd : function(updatedExpnd){
+		return $http.post("http://localhost:8080/FundsCollection/funds/updateExpnd", updatedExpnd)
+		.then(
+				function(successResp){
+					return successResp.data;
+				},
+				function(errResp){
+					return $q.reject(errResp);
+				}
+				);
+	} ,
+	remove : function(removeParams){
+		return $http.post("http://localhost:8080/FundsCollection/funds/remove", removeParams)
 		.then(
 				function(successResp){
 					return successResp.data;

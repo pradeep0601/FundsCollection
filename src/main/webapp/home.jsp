@@ -26,6 +26,8 @@
 <script type="text/javascript" src="resources/js/service/fundsMainService.js"></script>
 <!-- <link rel="stylesheet" href="resources/css/bootstrap.min.css">-->
 <link rel="stylesheet" href="resources/css/custom.css">
+<link rel="stylesheet" href="resources/css/lib/fontsCSS/css/font-awesome.min.css">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 </head>
 <body data-ng-app="fundsApp">
 

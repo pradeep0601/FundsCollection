@@ -1,6 +1,7 @@
 package com.aricent.fundscollection.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.*;
 import org.springframework.stereotype.Component;
@@ -21,7 +22,7 @@ public class Employee implements Serializable {
 		System.out.println(" Initializing Employee()... ");
 	}
 
-	public Employee(String firstName, String lastName, long contact, String email, String dob, String gender, long userName, String passWord) {
+	public Employee(String firstName, String lastName, long contact, String email, Date dob, String gender, long userName, String passWord) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -37,7 +38,7 @@ public class Employee implements Serializable {
 	String lastName;
 	long contact;
 	String email;
-	String dob;
+	Date dob;
 	String gender;
 	@Id
 	long userName;
@@ -74,12 +75,12 @@ public class Employee implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public String getDob() {
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getDob() {
 		return dob;
 	}
 	
-	public void setDob(String dob) {
+	public void setDob(Date dob) {
 		this.dob = dob;
 	}
 	
