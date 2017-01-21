@@ -22,10 +22,6 @@
 <script type="text/javascript" src="resources/js/controller/registerController.js"></script>
 <script type="text/javascript" src="resources/js/service/funds_service.js"></script>
 <script type="text/javascript" src="resources/js/service/userService.js"></script>
-<script type="text/javascript" src="resources/js/service/uploadService.js"></script>
-<script type="text/javascript" src="resources/js/controller/FileUploadController.js"></script>
-<script type="text/javascript" src="resources/js/service/albumService.js"></script>
-<script type="text/javascript" src="resources/js/controller/albumController.js"></script>
 <link href='http://fonts.googleapis.com/css?family=Yesteryear|Tillana|Allan' rel='stylesheet' type='text/css'>
 <!-- <link rel="stylesheet" href="resources/css/bootstrap.min.css"> -->
 <!-- <link rel="stylesheet" href="resources/css/custom.css"> -->

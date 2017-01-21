@@ -19,7 +19,7 @@ var compareTo = function() {
     };
   };
 
-var checkUnique = function(fundsService) {
+var checkUnique = function(userService) {
 	  return {
 		    restrict: 'A',
 		    require: 'ngModel',
@@ -27,14 +27,13 @@ var checkUnique = function(fundsService) {
 		    	ngModel.$asyncValidators.unique =  function (e) {
 		        if (!ngModel || !element.val()) return;
 		        var currentValue = element.val();
-		        return fundsService.checkUniqueValue(currentValue)
+		        return userService.checkUniqueValue(currentValue)
 		          .then(function (unique) {
 		            //Ensure value that being checked hasn't changed
 		            //since the Ajax call was made
 		            if (currentValue == element.val()) {
 		              console.log('unique = ' + unique);
-		              ngModel.$setValidity('unique', unique);
-		              scope.$broadcast('show-errors-check-validity');
+		              ngModel.$setValidity('uniqueUser', unique);
 		            }
 		          });
 		      };
@@ -42,14 +41,14 @@ var checkUnique = function(fundsService) {
 		  };
 		};
 
-app.controller("registerController", ["$scope","fundsService","$location",function($scope,fundsService,$location){
+app.controller("registerController", ["$scope","userService","$location",function($scope,userService,$location){
 
 	$scope.employee = {"firstName" : "", "lastName" : "", "contact" : "", "email" : "", "dob" : "", "gender" : "",
 						"userName" : "", "passWord" : "", "confirmPass" : ""};
 	$scope.registrationForm = { };
 		
 	$scope.register = function(employee){
-		return fundsService.register(employee)
+		return userService.register(employee)
 		.then(
 				function(successResp){
 					console.log("successResp = " + successResp);
@@ -91,7 +90,7 @@ app.controller("registerController", ["$scope","fundsService","$location",functi
 }]);
 
 app.directive("compareTo", compareTo);
-app.directive("ngUnique", checkUnique);
+app.directive("uniqueUser", checkUnique);
 
 $(document).ready(function (){
 	    $("#empId").popover('show');

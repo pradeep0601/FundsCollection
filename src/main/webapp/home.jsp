@@ -24,6 +24,10 @@
 <script type="text/javascript" src="resources/js/service/funds_service.js"></script>
 <script type="text/javascript" src="resources/js/controller/fundsMainCtrl.js"></script>
 <script type="text/javascript" src="resources/js/service/fundsMainService.js"></script>
+<script type="text/javascript" src="resources/js/service/uploadService.js"></script>
+<script type="text/javascript" src="resources/js/controller/FileUploadController.js"></script>
+<script type="text/javascript" src="resources/js/service/albumService.js"></script>
+<script type="text/javascript" src="resources/js/controller/albumController.js"></script>
 <!-- <link rel="stylesheet" href="resources/css/bootstrap.min.css">-->
 <link rel="stylesheet" href="resources/css/custom.css">
 <link href='http://fonts.googleapis.com/css?family=Montserrat|Yesteryear|Tillana|Allan' rel='stylesheet' type='text/css'>
