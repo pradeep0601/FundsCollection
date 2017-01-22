@@ -18,40 +18,26 @@
 					</div>
 					<div class="form-group">
 						<label>From Date:</label>
-						 <div data-ng-class = "{
-					          'has-error': rForm.fDate.$touched && rForm.fDate.$error.required,
-					          'has-success': rForm.fDate.$valid
-					       }">
+						 
 						<input type="date" 
 						class="form-control" 
 						data-ng-model = "reportInput.fromDate"
 						name = "fDate"
 						data-ng-required = "true"/>
-						<span class = "help-block"
-						      data-ng-show = "rForm.fDate.$touched && rForm.fDate.$error.required">
-						      From Date is required.
-						</span>
-						</div>
+						
+						
 					</div>
 					<div class="form-group">
 						<label for="pwd">To Date:</label> 
-						<div data-ng-class = "{
-					          'has-error': rForm.tDate.$touched && rForm.tDate.$error.required,
-					          'has-success': rForm.tDate.$valid
-					       }">
 						<input type="date" 
 						class="form-control" 
 						data-ng-model = "reportInput.toDate"
 						name = "tDate"
 						data-ng-required = "true"/>
-						<span class = "help-block"
-						      data-ng-show = "rForm.tDate.$touched && rForm.tDate.$error.required">
-						      To Date is required.
-						</span>
 						</div>
-					</div>
+					
 					<button class="btn-sm btn-primary" data-ng-click = "getReport()"
-					data-ng-disabled = "rForm.$invalid">View Report <span class="glyphicon glyphicon-search"></span></button>
+					data-ng-disabled = "rForm.$invalid"><span class="glyphicon glyphicon-search"></span> View Reports</button>
 				</form>
 			</div>
 			<div class="panel-footer"></div>

@@ -9,7 +9,9 @@
 				<div class=col-md-6>
 					<div class="form-horizontal">
 						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-10" data-ng-class = "{
+						<div class="col-sm-offset-2 col-sm-10">
+						<label for="eventName">Event Name :</label>
+							<div data-ng-class = "{
 							'has-error': expndForm.eName.$touched && expndForm.eName.$invalid,
 							'has-success': expndForm.eName.$valid 
 							}">
@@ -23,9 +25,12 @@
 								  Event Name is required.
 								  </span>
 							</div>
+							</div>
 						</div>
 						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-10" data-ng-class = "{
+						<div class="col-sm-offset-2 col-sm-10">
+						<label for="amountExpended">Amount Expended:</label>
+							<div data-ng-class = "{
 							'has-error': expndForm.amountExp.$touched && expndForm.amountExp.$invalid || expndForm.amountExp.$error.pattern,
 							'has-success': expndForm.eName.$valid 
 							}">
@@ -43,6 +48,7 @@
 									  data-ng-show = "expndForm.amountExp.$error.pattern">
 									  Amount is invalid.
 								</span>
+							</div>
 							</div>
 						</div>
 
@@ -63,38 +69,42 @@
 								</div>
 							</div>
 						</div>
-						<div class="form-group">
+					</div>
+				</div>
+				<div class=col-md-6>
+				    <div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
 							<label for="description">Description:</label>
 							<textarea class="form-control" rows="2" id="description"
 								data-ng-model="expenditure.description"></textarea>
 						</div>
 					</div>
-					</div>
-				</div>
-				<div class=col-md-6>
+					
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
 							<label for="description">Amount Expended:</label>
-							{{fundDetails.FUNDCYCLE.totalExpenditure}}
+							<i class="fa fa-inr"></i>{{fundDetails.FUNDCYCLE.totalExpenditure}}
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
 							<label for="description">Total Balance:</label>
-							{{fundDetails.FUNDCYCLE.totalBalance}}
+							<i class="fa fa-inr"></i>{{fundDetails.FUNDCYCLE.totalBalance}}
 						</div>
 					</div>
 					<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
-								<input type="submit" class="btn btn-primary btn-sm"
+							
+							<input type="submit" class="btn btn-primary btn-sm"
 									data-ng-disabled="expndForm.$invalid"
 									data-ng-click = "submit('expenditure')"
 									value="{{!expenditure.expndId? 'Add' : 'Update'}}">
+							
+							
 								<button type="button" data-ng-click="getFundDetails()"
-									class="btn btn-warning btn-sm"
-									data-ng-disabled="expndForm.$pristine">Reset Form
+									class="btn btn-warning btn-sm">Reset
 								</button>
+							
 							</div>
 						</div>
 				</div>
@@ -122,7 +132,7 @@
 							<tbody>
 								<tr data-ng-repeat = "expenditure in fundDetails.EXPENDITURES">
 									<td>{{expenditure.eventName}}</td>
-									<td>{{expenditure.amountExpended}}</td>
+									<td><i class="fa fa-inr"></i> {{expenditure.amountExpended}}</td>
 									<td>{{expenditure.eventDate | date : "fullDate"}}</td>
 									<td>{{expenditure.description}}</td>
 									<td>

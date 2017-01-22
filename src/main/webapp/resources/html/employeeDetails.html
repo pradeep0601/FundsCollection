@@ -1,0 +1,36 @@
+<div class="row container-fluid">
+	<div class="col-md-12">
+		<div class="row">
+			<div class="panel panel-info">
+				<div class="panel-heading text-center">
+					<h4>Employee Details</h4>
+				</div>
+				<div class="panel-body">
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th class="text-center" data-ng-click = "orderBy('userName')">Employee ID</th>
+									<th class="text-center" data-ng-click = "orderBy('firstName')">Name</th>
+									<th class="text-center" data-ng-click = "orderBy('dob')">Birthday</th>
+									<th class="text-center" data-ng-click = "orderBy('email')">Email</th>
+									<th class="text-center" data-ng-click = "orderBy('contact')">Contact</th>
+								</tr>
+								<tr data-ng-repeat="employee in fundDetails.EMPLOYEES | orderBy:myOrder">
+									<td class="text-center">{{employee.userName}}</td>
+									<td class="text-center">{{employee.firstName}}</td>
+									<td class="text-center">{{employee.dob | date : 'dd-MMMM'}}</td>
+									<td class="text-center">{{employee.email}}</td>
+									<td class="text-center">{{employee.contact}}</td>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="panel-footer"></div>
+			</div>
+		</div>
+	</div>
+</div>
