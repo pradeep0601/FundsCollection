@@ -9,7 +9,7 @@
 			<span data-ng-show="!albums.length">No Albums to Preview</span>
 			 <div class="col-lg-2 col-md-3 col-xs-4" data-ng-repeat="album in albums">
                 <a class="thumbnail">
-                    <img class="img-responsive" data-ng-click="loadAlbumImages(album.name)" data-ng-src="http://localhost:8080/FundsCollection/resources/albums/{{album.name}}/{{album.albumThumbnail}}" alt="">
+                    <img class="img-responsive" data-ng-click="loadAlbumImages(album.name)" data-ng-src="/FundsCollection/resources/uploads/albums/{{album.name}}/{{album.albumThumbnail}}" alt="">
                  </a>
                  <button type="button" class="btn btn-danger pull-right" data-ng-click="initiateDelete(album)"><span class="glyphicon glyphicon-remove"></span></button>
                 
