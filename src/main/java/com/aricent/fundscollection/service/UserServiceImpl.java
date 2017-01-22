@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.aricent.fundscollection.dao.UserDAO;
 import com.aricent.fundscollection.model.Employee;
+import com.aricent.fundscollection.util.Encryptor;
 /**
  * 
  * @author pradeku7
@@ -35,7 +36,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public boolean registerEmployee(Employee employee) {
 		
-		StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
+		StrongPasswordEncryptor passwordEncryptor = Encryptor.getInstance();
 		String encryptedPassword = passwordEncryptor.encryptPassword(employee.getPassWord());
 		
 		employee.setDob(new Date(System.currentTimeMillis()));

@@ -3,9 +3,11 @@ package com.aricent.fundscollection.dao;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.springframework.stereotype.Repository;
 
 import com.aricent.fundscollection.model.Employee;
+import com.aricent.fundscollection.util.Encryptor;
 import com.google.gson.Gson;
 /**
  * 
@@ -35,26 +37,13 @@ public class UserDAOImpl implements UserDAO{
 		if(employee == null){
 			return isValid;
 		}
-		
-		return employee.getPassWord().equals(password) ? true : false;
+		StrongPasswordEncryptor passwordEncryptor = Encryptor.getInstance();
+		return passwordEncryptor.checkPassword(password, employee.getPassWord()) ? true : false;
 	}
 
 	public boolean registerEmployee(Employee emp) {
 		
 		Gson gson = new Gson();
-		
-		/*try 
-		{
-			gson.toJson(emp,new FileWriter("test.json"));
-		}
-		catch (JsonIOException e) 
-		{
-			e.printStackTrace();
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		}*/
 		
 		entityManager.persist(emp);
 		
