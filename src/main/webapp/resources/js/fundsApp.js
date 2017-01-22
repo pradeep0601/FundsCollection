@@ -1,9 +1,9 @@
 'use strict';
 
-var app = angular.module("fundsApp",["ngRoute",'ngMaterial','ngMessages']);
+var fundsApp = angular.module("fundsApp",["ngRoute",'ngMaterial','ngMessages']);
 
 
-app.config(function($routeProvider) {
+fundsApp.config(function($routeProvider) {
 	$routeProvider
 		.when("/dashboard", {
 			templateUrl : "/FundsCollection/resources/html/dashboard.html",

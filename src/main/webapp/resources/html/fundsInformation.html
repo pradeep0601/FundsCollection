@@ -50,7 +50,7 @@
 							</div>
 							<div class="col-md-3 col-md-offset-3 ">
 								<button type="button" class="btn btn-info btn-sm"
-									data-toggle="modal" data-target="#stopCycle" data-ng-disabled = {{!fundDetails.FUNDCYCLE.isInProgress}}>Stop Fund
+									data-toggle="modal" data-target="#stopCycle" data-ng-disabled = {{!(fundDetails.FUNDCYCLE.isInProgress)}}>Stop Fund
 									Cycle</button>
 
 							</div>
@@ -66,7 +66,7 @@
 		<div class="row">
 			<div class="panel panel-info">
 				<div class="panel-heading text-center">Add Funds</div>
-				<form name="fundForm">
+				<form name="fundForm" data-ng-submit = "submit('fundsRecord')">
 				<div class="panel-body">
 					<div class="table-responsive">
 						<table class="table table-bordered">
@@ -74,7 +74,7 @@
 								<tr>
 									<th>Employee ID</th>
 									<th>Name</th>
-									<th>Cycle Start Date</th>
+									<!-- <th>Cycle Start Date</th> -->
 									<th>Current Cycle Share</th>
 									<th>Previous Balance</th>
 									<th>Total Amount to be paid</th>
@@ -83,31 +83,24 @@
 							</thead>
 							<tbody>
 								<tr>
-								<td data-ng-class = "{
-									'has-error': fundForm.uName.$touched && fundForm.uName.$error.required,
-									'has-success': fundForm.uName.$valid
-									}"
-									>
+								<td>
 									<select class="form-control"
+									    id="empId"
 										data-ng-model="fundsRecord"
 										data-ng-options="fundRecord.employee.userName for fundRecord in fundDetails.FUNDRECORDS" 
 										name="uName"
-										data-ng-required = "true">
+										required="required"
+										data-ng-selected = "true">
 									</select>
-									<span class = "help-block"
-										data-ng-show = "fundForm.uName.$touched && fundForm.uName.$error.required">
-										Employee ID shouldn't be blank.
-									</span>
 									</td>
 									<td>{{fundsRecord.employee.firstName}}</td>
-									<td>{{fundsRecord.fundCycle.startDate | date :
-										'dd-MMM-y'}}</td>
-									<!-- <td>{{fundsRecord.fundsCycle.startDate | date : "fullDate"}}</td> -->
+									<!-- <td>{{fundsRecord.fundCycle.startDate | date :
+										'dd-MMM-y'}}</td> -->
 									<td>{{fundsRecord.fundCycle.sharePerPerson}}</td>
 									<td>{{fundsRecord.amountRemained}}</td>
 									<td>{{fundsRecord.amountNeedToPay}}</td>
 									<td data-ng-class = "{
-									'has-error': fundForm.pAmount.$touched && fundForm.pAmount.$error.required,
+									'has-error': fundForm.pAmount.$touched && fundForm.pAmount.$error.required || fundForm.pAmount.$error.maxlength || fundForm.pAmount.$error.pattern,
 									'has-success': fundForm.pAmount.$valid
 									}"
 									>
@@ -115,17 +108,26 @@
 									    placeholder="Enter Actual paid amount"
 										data-ng-model="fundsRecord.actualPaidAmount"
 										name = "pAmount"
-										data-ng-required = "true"/>
+										data-ng-required = "true"
+										data-ng-pattern="/^[0-9]+$/" 
+										data-ng-maxlength="4"/>
 										<span class = "help-block"
 										data-ng-show = "fundForm.pAmount.$touched && fundForm.pAmount.$error.required">
 										Paid amount shouldn't be blank.
 										</span>
+										<span class = "help-block"
+										data-ng-show = "fundForm.pAmount.$error.pattern || fundForm.pAmount.$error.maxlength">
+										Amount should be in digit and < <i class="fa fa-inr"></i>10000
+										</span>
+										 <input type="hidden" data-ng-model="fundsRecord.recordId" />
 									</td>
-									<td><button class="btn-sm btn-primary"
-											data-ng-click="addFunds(fundsRecord)"
-											data-ng-disabled = "fundForm.$invalid">
-											Add <span class="glyphicon glyphicon-plus"></span>
-										</button></td>
+									<td>
+										<input type = "submit"
+										    class="btn btn-primary btn-sm"
+											data-ng-disabled = "fundForm.$invalid"
+											value="{{!fundsRecord.recordId? 'Add' : 'Update'}}">
+										<button type="button" data-ng-click="getFundDetails()" class="btn btn-warning btn-sm" data-ng-disabled="fundForm.$pristine">Reset Form</button>
+									</td>
 								</tr>
 							</tbody>
 						</table>
@@ -152,16 +154,20 @@
 									<th>Payment Date</th>
 									<th>Amount Paid</th>
 									<th>Amount Remained</th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr
-									data-ng-repeat="paidFundRecord in fundDetails.PAIDFUNDRECORDS">
+								<tr data-ng-repeat="paidFundRecord in fundDetails.PAIDFUNDRECORDS">
 									<td>{{paidFundRecord.employee.userName}}</td>
 									<td>{{paidFundRecord.employee.firstName}}</td>
 									<td>{{paidFundRecord.payDate | date : "fullDate"}}</td>
 									<td>{{paidFundRecord.actualPaidAmount}}</td>
 									<td>{{paidFundRecord.amountRemained}}</td>
+									<td>
+									  <button type="button" data-ng-click="edit('fundsRecord',paidFundRecord.recordId)" class="btn btn-success custom-width" data-ng-disabled = {{!(fundDetails.FUNDCYCLE.isInProgress)}}>Edit</button>  
+									  <button type="button" data-ng-really-message="Do you really want to delete it?" data-ng-really-click="remove('fundsRecord',paidFundRecord.recordId)" class="btn btn-danger custom-width" data-ng-disabled = {{!(fundDetails.FUNDCYCLE.isInProgress)}}>Remove</button>
+									</td>
 								</tr>
 							</tbody>
 						</table>

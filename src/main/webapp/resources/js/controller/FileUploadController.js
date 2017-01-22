@@ -5,7 +5,7 @@
 
 
 
-app.controller('FileUploadController', ["$scope","uploadService","$location",function ($scope,uploadService,$location) {
+fundsApp.controller('FileUploadController', ["$scope","uploadService","$location",function ($scope,uploadService,$location) {
 
 	$scope.album = {"name":"" , "description" : "", "files" : ""}
 	$scope.percentage = 0;

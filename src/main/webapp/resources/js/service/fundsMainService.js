@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory("fundsMainService",["$http","$q", function($http, $q){
+fundsApp.factory("fundsMainService",["$http","$q", function($http, $q){
 	return{
 		 getFundDetails : function(){
 				return $http.get("http://localhost:8080/FundsCollection/funds/fundDetails")
