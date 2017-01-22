@@ -5,7 +5,7 @@
 
 
 
-fundsApp.controller('FileUploadController', ["$scope","uploadService","$location",function ($scope,uploadService,$location) {
+fundsApp.controller('FileUploadController', ["$scope","$window","uploadService","$location",function ($scope,$window,uploadService,$location) {
 
 	$scope.album = {"name":"" , "description" : "", "files" : ""}
 	$scope.percentage = 0;
@@ -39,6 +39,7 @@ fundsApp.controller('FileUploadController', ["$scope","uploadService","$location
         					 $("#AlbumSuccessModal").modal('show');
 
         				 });
+        				 $window.location.reload();
         			 }
         			 else
         			 {
@@ -64,7 +65,7 @@ fundsApp.controller('FileUploadController', ["$scope","uploadService","$location
     }
 }]);
 
-app.directive('ngFiles', ['$parse', function ($parse) {
+fundsApp.directive('ngFiles', ['$parse', function ($parse) {
 	 return {
 	        restrict: 'A',
 	        link: function (scope, element, attrs) {

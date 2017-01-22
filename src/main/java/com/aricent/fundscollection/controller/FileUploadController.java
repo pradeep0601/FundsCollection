@@ -37,7 +37,7 @@ public class FileUploadController {
 	public @ResponseBody
 	boolean uploadMultipleFileHandler(MultipartHttpServletRequest request,@RequestParam("name") String name,@RequestParam("description") String description) {
 		
-	
+	    final String UPLOAD_DIRECTORY = "uploads";
         Map<String,MultipartFile> fileMap = request.getFileMap();
         
         if(fileMap.isEmpty())
@@ -47,7 +47,9 @@ public class FileUploadController {
              
         boolean isSuccessfullyUploaded = true;
         
-        String rootPath = "C:\\Users\\srajsriv\\Documents\\AJS-Project\\FundsCollection\\src\\main\\webapp\\resources" + File.separator + "albums" + File.separator + name;
+        //String rootPath = "C:\\Users\\srajsriv\\Documents\\AJS-Project\\FundsCollection\\src\\main\\webapp\\resources" + File.separator + "albums" + File.separator + name;
+        //String rootPath = "..\\uploads" + File.separator + "albums" + File.separator + name;
+        String rootPath = request.getSession().getServletContext().getRealPath("") + File.separator + "resources" + File.separator + UPLOAD_DIRECTORY + File.separator + "albums" + File.separator + name;
         
         String albumThumbnail = EMPTY_STRING;
         

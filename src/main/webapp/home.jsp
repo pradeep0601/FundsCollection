@@ -51,7 +51,7 @@
 			   <li><a href="#fundsInfo">Funds</a></li>
 			   <li><a href="#expenditure">Expenditure</a></li>
 			   <li><a href="#report">Report</a></li>
-			   <li><a href="#activity">Activities</a></li>
+			   <!-- <li><a href="#activity">Activities</a></li>-->
 			   <li><a href="#gallery">Gallery</a></li>
 			   <li><a href="#contact">Contact Us</a></li>
 		    </ul>

@@ -3,7 +3,7 @@
 
 
 
-fundsApp.controller('albumController', ["$scope","$location","albumService",function ($scope,$location,albumService) {
+fundsApp.controller('albumController', ["$scope","$window","$location","albumService",function ($scope,$window,$location,albumService) {
 
 	$scope.Service = albumService;
 	
@@ -54,6 +54,7 @@ fundsApp.controller('albumController', ["$scope","$location","albumService",func
 	        					 $("#AlbumDeleteSuccessModal").modal('show');
 
 	        				 });
+	        				 $window.location.reload();
 	        			 }
 	        			 else
 	        			 {
@@ -72,7 +73,7 @@ fundsApp.controller('albumController', ["$scope","$location","albumService",func
 }  
 ]);
 
-app.controller('albumGalleryController', ["$scope","$location","albumService",function ($scope,$location,albumService) {
+fundsApp.controller('albumGalleryController', ["$scope","$location","albumService",function ($scope,$location,albumService) {
 
 	$scope.sharedService = albumService;
 	$scope.album = $scope.sharedService.albumName;
@@ -106,7 +107,7 @@ app.controller('albumGalleryController', ["$scope","$location","albumService",fu
 		 
 		 $('#photo-browse-modal').modal('show');
 		 var fullImg = document.getElementById("imageModal");
-		 fullImg.setAttribute("src", "http://localhost:8080/FundsCollection/resources/albums/" + album + "/" + image );
+		 fullImg.setAttribute("src", "http://localhost:8080/FundsCollection/resources/uploads/albums/" + album + "/" + image );
 		 fullImg.setAttribute("class", "img-responsive");
 		 fullImg.setAttribute("alt", image);
 		 fullImg.setAttribute("width", "870");
@@ -147,7 +148,7 @@ app.controller('albumGalleryController', ["$scope","$location","albumService",fu
 			 
 		 }
 		
-			 fullImg.setAttribute("src", "http://localhost:8080/FundsCollection/resources/albums/" + album + "/" + images[i+1] );
+			 fullImg.setAttribute("src", "http://localhost:8080/FundsCollection/resources/uploads/albums/" + album + "/" + images[i+1] );
 			 fullImg.setAttribute("class", "img-responsive");
 			 fullImg.setAttribute("alt", images[i+1]);
 			 fullImg.setAttribute("width", "870");
@@ -176,7 +177,7 @@ app.controller('albumGalleryController', ["$scope","$location","albumService",fu
 		 }
 		
 				 	 
-			 fullImg.setAttribute("src", "http://localhost:8080/FundsCollection/resources/albums/" + album + "/" + images[i-1] );
+			 fullImg.setAttribute("src", "http://localhost:8080/FundsCollection/resources/uploads/albums/" + album + "/" + images[i-1] );
 			 fullImg.setAttribute("alt", images[i-1]);
 			 fullImg.setAttribute("width", "870");
 			 fullImg.setAttribute("height", "600");

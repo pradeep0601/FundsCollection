@@ -15,12 +15,9 @@
 <script type="text/javascript" src="resources/js/lib/angular-min.js"></script>
 <script type="text/javascript" src="resources/js/lib/bootstrap.min.js"></script>-->
 <script type="text/javascript" src="resources/js/lib/angular-route.min.js"></script>
- 
 <script type="text/javascript" src="resources/js/userApp.js"></script>
-<script type="text/javascript" src="resources/js/controller/funds_controller.js"></script>
 <script type="text/javascript" src="resources/js/controller/userController.js"></script>
 <script type="text/javascript" src="resources/js/controller/registerController.js"></script>
-<script type="text/javascript" src="resources/js/service/funds_service.js"></script>
 <script type="text/javascript" src="resources/js/service/userService.js"></script>
 <link href='http://fonts.googleapis.com/css?family=Yesteryear|Tillana|Allan' rel='stylesheet' type='text/css'>
 <!-- <link rel="stylesheet" href="resources/css/bootstrap.min.css"> -->
@@ -31,7 +28,6 @@
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
 <!-- new scripts ends -->
-<script type="text/javascript" src="resources/js/headerMenu.js"></script>
 </head>
 <body id="parent" data-ng-app="userApp" bgcolor="grey" data-ng-controller="userController">
 

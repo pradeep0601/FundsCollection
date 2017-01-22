@@ -56,6 +56,7 @@ app.controller("registerController", ["$scope","userService","$location",functio
 					if(successResp == true)
 						{
 							$("#RegisterSuccessModal").modal({backdrop: 'static', keyboard: false});
+							console.log("registerController :: Employee registration is completed successfully.");
 						}
 					else
 						{
@@ -76,8 +77,8 @@ app.controller("registerController", ["$scope","userService","$location",functio
 	
 	$scope.acknowledgeRegistration = function(){
 		$("#RegisterSuccessModal").modal('hide');
-		$location.path("/welcome");
-		
+		$('.modal-backdrop').remove();
+		$location.path("/login");
 	};
 	
 	$scope.startLogin = function (){
