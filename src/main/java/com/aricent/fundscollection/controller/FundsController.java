@@ -10,11 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aricent.fundscollection.model.Expenditure;
 import com.aricent.fundscollection.model.FundCycle;
 import com.aricent.fundscollection.model.FundsRecord;
+import com.aricent.fundscollection.model.RemoveParams;
 import com.aricent.fundscollection.model.Report;
 import com.aricent.fundscollection.service.FundService;
 import com.aricent.fundscollection.util.FundUtil.Records;
@@ -46,6 +48,7 @@ public class FundsController {
 			fundService.stopFundCycle(fundCycle);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception exception) {
+			exception.printStackTrace();
            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -65,27 +68,32 @@ public class FundsController {
 
 	@RequestMapping(value = "/addFunds", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<Boolean> addFunds(@RequestBody FundsRecord fundsRecord) {
+	public ResponseEntity<Integer> addFunds(@RequestBody FundsRecord fundsRecord) {
 
+		Integer recordId = null;
+		
 		try {
-			fundService.addFunds(fundsRecord);
+			recordId = fundService.addFunds(fundsRecord);
 
-			return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+			return new ResponseEntity<Integer>(recordId, HttpStatus.OK);
 		} catch (Exception exception) {
-			return new ResponseEntity<Boolean>(false, HttpStatus.INTERNAL_SERVER_ERROR);
+			exception.printStackTrace();
+			return new ResponseEntity<Integer>(recordId, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
 	@RequestMapping(value = "/expenditure", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<HttpStatus> addExpenditure(@RequestBody Expenditure expenditure) {
+	public ResponseEntity<Integer> addExpenditure(@RequestBody Expenditure expenditure) {
 
 		System.out.println(expenditure);
+		Integer expndId = null;
 		try {
-			fundService.addExpenditure(expenditure);
-			return new ResponseEntity<>(HttpStatus.OK);
+			expndId = fundService.addExpenditure(expenditure);
+			return new ResponseEntity<Integer>(expndId, HttpStatus.OK);
 		} catch (Exception exception) {
-           return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			exception.printStackTrace();
+           return new ResponseEntity<Integer>(expndId, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
@@ -103,5 +111,48 @@ public class FundsController {
 			return new ResponseEntity<List<FundsRecord>>(reports, HttpStatus.OK);
 		}
 	}
+	@RequestMapping(value = "/updateFR", method = RequestMethod.POST)
+	public ResponseEntity<Boolean> updateFRecord(@RequestBody FundsRecord updatedFR){
+		
+		Boolean result = false;
+		try{
+			result = fundService.updateRecord(updatedFR);
+			
+			return new ResponseEntity<Boolean>(result, HttpStatus.OK);
+		}
+		catch(Exception ex){
+			ex.printStackTrace();
+			return new ResponseEntity<Boolean>(result, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
+	@RequestMapping(value = "/updateExpnd", method = RequestMethod.POST)
+	public ResponseEntity<Boolean> updateExpnd(@RequestBody Expenditure updatedExpnd){
+		
+		Boolean result = false;
+		try{
+			result = fundService.updateExpenditure(updatedExpnd);
+			
+			return new ResponseEntity<Boolean>(result, HttpStatus.OK);
+		}
+		catch(Exception ex){
+			ex.printStackTrace();
+			return new ResponseEntity<Boolean>(result, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	
+	@RequestMapping(value = "/remove", method = RequestMethod.POST)
+	public ResponseEntity<Boolean> remove(@RequestBody RemoveParams removeParams){
+		
+		Boolean result = false;
+		try{
+			result = fundService.remove(removeParams.getType(), removeParams.getId());
+			return new ResponseEntity<Boolean>(result, HttpStatus.OK);
+		}
+		catch(Exception ex){
+			ex.printStackTrace();
+			return new ResponseEntity<Boolean>(result, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }

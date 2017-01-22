@@ -1,6 +1,8 @@
 package com.aricent.fundscollection.dao;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +18,7 @@ import com.aricent.fundscollection.model.Expenditure;
 import com.aricent.fundscollection.model.FundCycle;
 import com.aricent.fundscollection.model.FundsRecord;
 import com.aricent.fundscollection.model.Report;
+import com.aricent.fundscollection.util.FundUtil;
 import com.aricent.fundscollection.util.FundUtil.Records;
 
 @Repository
@@ -49,12 +52,15 @@ public class FundDAOImpl implements FundDAO {
 
 		Map<Records, Object> fundDetails = new HashMap<>();
 
+		List<Employee> employees = getAllEmployee();
+		
+		fundDetails.put(Records.BIRTHDAY_LIST, getBirthdayList(employees));
+		
 		FundCycle fundCycle = getCurrentCycle();
 
 		if (fundCycle == null) {
 			return fundDetails;
 		}
-		List<Employee> employees = getAllEmployee();
 
 		Map<Records, List<FundsRecord>> currPrevRecords = getCurrPrevFundRecords(fundCycle.getFundId());
 
@@ -84,7 +90,7 @@ public class FundDAOImpl implements FundDAO {
 		fundDetails.put(Records.FUNDCYCLE, fundCycle);
 		fundDetails.put(Records.EMPLOYEES, employees);
 		fundDetails.put(Records.EXPENDITURES, getExpenditures(fundCycle));
-
+		
 		return fundDetails;
 	}
 
@@ -96,11 +102,19 @@ public class FundDAOImpl implements FundDAO {
 	}
 
 	private FundCycle getCurrentCycle() {
-		Query query = entityManager.createQuery("SELECT fc FROM FundCycle fc where fc.isInProgress is true ORDER BY fc.fundId DESC");
+		//Query query = entityManager.createQuery("SELECT fc FROM FundCycle fc where fc.isInProgress is true ORDER BY fc.fundId DESC");
+		Query query = entityManager.createQuery("SELECT fc FROM FundCycle fc  ORDER BY fc.fundId DESC");
 		List<FundCycle> fundCycles = query.getResultList();
 		FundCycle fundCycle = fundCycles.size() != 0 ? fundCycles.get(0) : null;
 		return fundCycle;
 	}
+	
+	/*private FundCycle getPreviousCycle() {
+		Query query = entityManager.createQuery("SELECT fc FROM FundCycle fc where fc.isInProgress is false ORDER BY fc.fundId DESC");
+		List<FundCycle> fundCycles = query.getResultList();
+		FundCycle fundCycle = fundCycles.size() != 0 ? fundCycles.get(0) : null;
+		return fundCycle;
+	}*/
 
 	private Map<Records, List<FundsRecord>> getCurrPrevFundRecords(Integer fundId) {
 
@@ -171,7 +185,7 @@ public class FundDAOImpl implements FundDAO {
 	}
 
 	@Override
-	public Boolean addFunds(FundsRecord fundsRecord) {
+	public Integer addFunds(FundsRecord fundsRecord) {
 
 		FundCycle fundCycle = entityManager.find(FundCycle.class, fundsRecord.getFundCycle().getFundId());
 		
@@ -181,8 +195,9 @@ public class FundDAOImpl implements FundDAO {
 		fundCycle.setTotalCollection(totalCollection);
 				
 		entityManager.persist(fundsRecord);
+		Integer recordId = fundsRecord.getRecordId();
 
-		return true;
+		return recordId;
 	}
 
 	@Override
@@ -223,8 +238,8 @@ public class FundDAOImpl implements FundDAO {
 				}
 			}
 			fundCycle.setIsInProgress(false);
-			fundCycle.setTotalCollection(getTotalCollection(fundCycle));
-			fundCycle.setTotalExpenditure(getTotalExpediture(fundCycle));
+			//fundCycle.setTotalCollection(getTotalCollection(fundCycle));
+			//fundCycle.setTotalExpenditure(getTotalExpediture(fundCycle));
 			entityManager.merge(fundCycle);
 		}
 		return true;
@@ -244,17 +259,19 @@ public class FundDAOImpl implements FundDAO {
 	private Float getTotalExpediture(FundCycle fundCycle) {
 
 		Query getTotalCollectionQuery = entityManager
-				.createQuery("SELECT SUM(exp.amountExpend) FROM Expenditure exp where exp.fundCycle.fundId = :fundId");
+				.createQuery("SELECT SUM(exp.amountExpended) FROM Expenditure exp where exp.fundCycle.fundId = :fundId");
 
 		getTotalCollectionQuery.setParameter("fundId", fundCycle.getFundId());
 
-		Float totalCollection = (Float) getTotalCollectionQuery.getSingleResult();
+		Double result =  (Double) getTotalCollectionQuery.getSingleResult();
 
+		Float totalCollection = new Float(result);
+		
 		return totalCollection;
 	}
 
 	@Override
-	public Boolean addExpenditure(Expenditure expenditure) {
+	public Integer addExpenditure(Expenditure expenditure) {
 		
 		entityManager.persist(expenditure);
 		
@@ -272,7 +289,8 @@ public class FundDAOImpl implements FundDAO {
 		fundCycle.setTotalBalance(fundCycle.getTotalBalance() - expenditure.getAmountExpended());	
 		fundCycle.setTotalExpenditure(totalExpenditure);
 		
-		return true;
+		Integer expndId = expenditure.getExpndId();
+		return expndId;
 	}
 	
 	private List<Expenditure> getExpenditures(FundCycle fundCycle){
@@ -309,4 +327,94 @@ public class FundDAOImpl implements FundDAO {
 		
        return reports;
 	}
+	
+	private List<Employee> getBirthdayList(List<Employee> employees){
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		
+		List<Employee> result = new ArrayList<>();
+		for(Employee employee : employees){
+			Date dob = employee.getDob();
+			Calendar dobCal = Calendar.getInstance();
+			dobCal.setTime(dob);
+			if(cal.get(Calendar.MONTH) == dobCal.get(Calendar.MONTH)){
+				result.add(employee);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public boolean updateRecord(FundsRecord updatedFR) {
+		FundsRecord frFetchedFromDB = entityManager.find(FundsRecord.class, updatedFR.getRecordId());
+		
+		FundCycle fundCycle = entityManager.find(FundCycle.class, updatedFR.getFundCycle().getFundId());
+			
+		fundCycle.setTotalBalance(fundCycle.getTotalBalance() + (updatedFR.getActualPaidAmount() - frFetchedFromDB.getActualPaidAmount()));
+		fundCycle.setTotalCollection(fundCycle.getTotalCollection() + (updatedFR.getActualPaidAmount() - frFetchedFromDB.getActualPaidAmount()));
+			
+		//only actual paid amount can be updated
+		
+		frFetchedFromDB.setActualPaidAmount(updatedFR.getActualPaidAmount());
+		frFetchedFromDB.setAmountRemained(updatedFR.getAmountRemained());
+		frFetchedFromDB.setPayDate(updatedFR.getPayDate());
+		
+       
+		return true;
+	}
+
+	@Override
+	public boolean updateExpenditure(Expenditure updatedExpnd) {
+		
+		Expenditure expndFetchedFromDB = entityManager.find(Expenditure.class, updatedExpnd.getExpndId());
+		
+		expndFetchedFromDB.setEventName(updatedExpnd.getEventName());
+		expndFetchedFromDB.setAmountExpended(updatedExpnd.getAmountExpended());
+		expndFetchedFromDB.setEventDate(updatedExpnd.getEventDate());
+		expndFetchedFromDB.setDescription(updatedExpnd.getDescription());
+		
+		FundCycle fundCycle = expndFetchedFromDB.getFundCycle();
+		Float expndDiff = updatedExpnd.getAmountExpended() - expndFetchedFromDB.getAmountExpended();
+		fundCycle.setTotalExpenditure(fundCycle.getTotalExpenditure() + expndDiff);
+		fundCycle.setTotalBalance(fundCycle.getTotalBalance() - expndDiff);
+		return true;
+	}
+	
+
+	@Override
+	public boolean remove(String type, Integer id) {
+		int rowsDeleted = 0;
+		FundCycle fundCycle = null;
+		switch(type){
+		case FundUtil.FUNDS_RECORD:
+			FundsRecord fundsRecord = entityManager.find(FundsRecord.class, id);
+			
+			fundCycle = fundsRecord.getFundCycle();
+					
+			Query fundRecordDlt = entityManager.createQuery("DELETE FROM FundsRecord fr WHERE fr.recordId = :recordId");
+			fundRecordDlt.setParameter("recordId", id);
+			rowsDeleted = fundRecordDlt.executeUpdate();
+			
+			fundCycle.setTotalBalance(fundCycle.getTotalBalance() - fundsRecord.getActualPaidAmount());
+			fundCycle.setTotalCollection(fundCycle.getTotalCollection() - fundsRecord.getActualPaidAmount());
+		
+			break;
+		case FundUtil.EXPENDITURE:
+			Expenditure expenditure = entityManager.find(Expenditure.class, id);
+			
+			fundCycle = expenditure.getFundCycle();
+			
+			Query expndDlt = entityManager.createQuery("DELETE FROM Expenditure expnd WHERE expnd.expndId = :expndId");
+			expndDlt.setParameter("expndId", id);
+			rowsDeleted = expndDlt.executeUpdate();
+			
+			fundCycle.setTotalBalance(fundCycle.getTotalBalance() + expenditure.getAmountExpended());
+			fundCycle.setTotalExpenditure(fundCycle.getTotalExpenditure() - expenditure.getAmountExpended());
+			
+			break;
+		}
+		return rowsDeleted > 0 ? true : false;
+	}
+
+
 }

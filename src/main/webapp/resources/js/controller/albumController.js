@@ -3,7 +3,7 @@
 
 
 
-app.controller('albumController', ["$scope","$location","albumService",function ($scope,$location,albumService) {
+fundsApp.controller('albumController', ["$scope","$location","albumService",function ($scope,$location,albumService) {
 
 	$scope.Service = albumService;
 	

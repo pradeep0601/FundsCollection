@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService{
 		StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
 		String encryptedPassword = passwordEncryptor.encryptPassword(employee.getPassWord());
 		
-		employee.setDob(new Date(System.currentTimeMillis()).toString());
+		employee.setDob(new Date(System.currentTimeMillis()));
 		employee.setPassWord(encryptedPassword);
 		
 		return userDAO.registerEmployee(employee);

@@ -3,7 +3,7 @@
  */
 'use strict';
 
-app.factory("albumService",["$http","$q", function($http, $q){
+fundsApp.factory("albumService",["$http","$q", function($http, $q){
 	return{
 				
 		getAllAlbums : function(){

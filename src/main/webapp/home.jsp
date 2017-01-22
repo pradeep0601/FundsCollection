@@ -30,6 +30,8 @@
 <script type="text/javascript" src="resources/js/controller/albumController.js"></script>
 <!-- <link rel="stylesheet" href="resources/css/bootstrap.min.css">-->
 <link rel="stylesheet" href="resources/css/custom.css">
+<link rel="stylesheet" href="resources/css/lib/fontsCSS/css/font-awesome.min.css">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 <link href='http://fonts.googleapis.com/css?family=Montserrat|Yesteryear|Tillana|Allan' rel='stylesheet' type='text/css'>
 </head>
 <body data-ng-app="fundsApp">

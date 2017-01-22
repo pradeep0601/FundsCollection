@@ -3,7 +3,7 @@
  */
 'use strict';
 
-app.factory("uploadService",["$http","$q", function($http, $q){
+fundsApp.factory("uploadService",["$http","$q", function($http, $q){
 	return{
 		createAlbum : function(data){
 			

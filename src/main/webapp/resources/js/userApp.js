@@ -21,14 +21,6 @@ app.config(function($routeProvider) {
 			templateUrl : "/FundsCollection/resources/html/register.html",
 			controller : "registerController"
 		})
-		.when("/browseAlbum", {
-			templateUrl : "/FundsCollection/resources/html/ImageGallery.html",
-			controller : "albumController"
-		})
-		.when("/gallery", {
-			templateUrl : "/FundsCollection/resources/html/createAlbum.html",
-			controller : "FileUploadController"
-		})
 		.otherwise({
 			redirectTo: "/welcome"
 		});
