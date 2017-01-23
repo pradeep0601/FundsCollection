@@ -21,6 +21,10 @@ app.config(function($routeProvider) {
 			templateUrl : "/FundsCollection/resources/html/register.html",
 			controller : "registerController"
 		})
+		.when("/error", {
+			templateUrl : "/FundsCollection/resources/html/error.html",
+			controller : "userController"
+		})
 		.otherwise({
 			redirectTo: "/welcome"
 		});

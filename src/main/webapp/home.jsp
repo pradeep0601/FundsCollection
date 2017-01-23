@@ -35,7 +35,7 @@
 <link href='http://fonts.googleapis.com/css?family=Yesteryear|Tillana|Allan' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 </head>
-<body data-ng-app="fundsApp">
+<body data-ng-app="fundsApp" data-ng-controller="fundsMainCtrl">
 
 	<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid">
@@ -65,7 +65,7 @@
 						<div class="dropdown-menu"
 							style="padding: 15px; padding-bottom: 15px;">
 
-							<button class="btn btn-default btn-logout" id="btnLogout" type="button"	data-ng-click="startLogin()">LOG OUT</button>
+							<button class="btn btn-default btn-logout" id="btnLogout" type="button"	data-ng-click="startLogout()">LOG OUT</button>
 						</div></li>
 				</ul>
 		</div>
@@ -74,7 +74,7 @@
 	</div>
 	</nav>
 
-	<div class="container" data-ng-controller="fundsMainCtrl"  data-ng-init = "getFundDetails()">
+	<div class="container"  data-ng-init = "getFundDetails()">
 		<div data-ng-view></div>
 	</div>
 </body>

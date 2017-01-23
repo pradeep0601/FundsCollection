@@ -1,6 +1,6 @@
 'use strict';
 
-fundsApp.controller("fundsMainCtrl", ["$scope","fundsMainService",function($scope,fundsMainService){
+fundsApp.controller("fundsMainCtrl", ["$scope","fundsMainService","$window","$location",function($scope,fundsMainService,$window,$location){
 	
 	$scope.fundDetails = [];
 	$scope.getFundDetails = function(){
@@ -35,5 +35,11 @@ fundsApp.controller("fundsMainCtrl", ["$scope","fundsMainService",function($scop
 		}
 		
 	}
+	
+	 
+	 $scope.startLogout = function (){
+			var $loginUrl = "http://" + $window.location.host + "/FundsCollection/index.jsp#/login";
+			$window.location.href = $loginUrl;
+		}
 	
 }]);
