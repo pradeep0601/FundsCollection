@@ -34,7 +34,7 @@
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 <link href='http://fonts.googleapis.com/css?family=Montserrat|Yesteryear|Tillana|Allan' rel='stylesheet' type='text/css'>
 </head>
-<body data-ng-app="fundsApp">
+<body data-ng-app="fundsApp" data-ng-controller="fundsMainCtrl">
 
 	<nav class="navbar navbar-default">
 	<div class="container-fluid">
@@ -63,7 +63,7 @@
 						<div class="dropdown-menu"
 							style="padding: 15px; padding-bottom: 15px;">
 
-							<button class="btn btn-default btn-logout" id="btnLogout" type="button"	data-ng-click="startLogin()">LOG OUT</button>
+							<button class="btn btn-default btn-logout" id="btnLogout" type="button"	data-ng-click="startLogout()">LOG OUT</button>
 						</div></li>
 				</ul>
 		</div>
@@ -72,7 +72,7 @@
 	</div>
 	</nav>
 
-	<div class="container" data-ng-controller="fundsMainCtrl"  data-ng-init = "getFundDetails()">
+	<div class="container"  data-ng-init = "getFundDetails()">
 		<div data-ng-view></div>
 	</div>
 </body>

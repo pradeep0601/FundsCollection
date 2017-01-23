@@ -37,8 +37,11 @@ fundsApp.config(function($routeProvider) {
 			templateUrl : "/FundsCollection/resources/html/employeeDetails.html",
 			controller : "fundsController"
 		})
+		.when("/error", {
+			templateUrl : "/FundsCollection/resources/html/error.html",
+			controller : "fundsController"
+		})
 		.otherwise({
 			redirectTo: "/dashboard"
 		});
 });
-

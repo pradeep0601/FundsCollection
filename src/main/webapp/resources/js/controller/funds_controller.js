@@ -32,7 +32,7 @@ fundsApp.controller("fundsController", ["$scope","fundsService","$location",func
 				function(errResp){
 					console.log("errResp = "+errResp);
 					console.error("Error while stoping funds cycle");
-					$location.path("/fundsInfo");
+					$location.path("/error");
 				}
 				);
 	}
@@ -58,6 +58,7 @@ fundsApp.controller("fundsController", ["$scope","fundsService","$location",func
 				function(errResp){
 					console.log("errResp = "+errResp);
 					console.log("Error while adding funds");
+					$location.path("/error");
 				}
 				);
 	};
@@ -133,6 +134,7 @@ fundsApp.controller("fundsController", ["$scope","fundsService","$location",func
 				function(errResp){
 					console.log("errResp = "+errResp);
 					console.log("Error while updating funds");
+					$location.path("/error");
 				}
 				);
 	}
@@ -178,6 +180,7 @@ fundsApp.controller("fundsController", ["$scope","fundsService","$location",func
 						},
 						function(errResp){
 							console.log("Error while deleting record with type = "+type+", id = "+id);
+							$location.path("/error");
 						}
 					 );
 	}
@@ -201,6 +204,7 @@ fundsApp.controller("fundsController", ["$scope","fundsService","$location",func
 				function(errResp){
 					console.log("errResp : "+errResp);
 					console.log("Error while adding expenditure");
+					$location.path("/error");
 				}
 				);
 	}
@@ -223,8 +227,12 @@ fundsApp.controller("fundsController", ["$scope","fundsService","$location",func
 				function(errResp){
 					console.log("errResp : "+errResp);
 					console.log("Error while updating expenditure");
+					$location.path("/error");
 				}
 		);
+	}
+	$scope.resetExpenditure = function(){
+		$scope.expenditure = {};
 	}
 	$scope.reportInput = {"isChecked" : "", "reportBy" : "employeeId", "employee" : "", "fromDate" : "", "toDate" : ""};
 	
@@ -242,6 +250,7 @@ fundsApp.controller("fundsController", ["$scope","fundsService","$location",func
 			},
 			function(errResp){
 				console.log("Error while fetching report");
+				$location.path("/error");
 			}
 			);
 	}
@@ -274,6 +283,7 @@ fundsApp.controller("fundsController", ["$scope","fundsService","$location",func
 	 $scope.orderBy = function(x){
 	    	$scope.myOrder = x;
 	    }
+	
 }]);
 
 fundsApp.directive('ngReallyClick', [function() {

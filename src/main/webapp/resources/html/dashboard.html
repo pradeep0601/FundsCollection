@@ -19,7 +19,7 @@
 								<td>Fund Cycle Start Date</td>
 								<td>{{fundDetails.FUNDCYCLE.startDate | date : 'dd-MMM-y'}}</td>
 								</tr>
-								<tr class = "active">
+								<tr class = "active" data-ng-hide = "fundDetails.FUNDCYCLE.isInProgress">
 								<td>Fund Cycle End Date</td>
 								<td>{{fundDetails.FUNDCYCLE.endDate | date : 'dd-MMM-y'}}</td>
 								</tr>

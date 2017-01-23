@@ -106,7 +106,7 @@
 										data-ng-pattern="/^[0-9]+$/" 
 										data-ng-maxlength="4"/>
 										<span class = "help-block"
-										data-ng-show = "fundForm.pAmount.$touched && fundForm.pAmount.$error.required">
+										data-ng-show = "fundForm.$dirty && fundForm.pAmount.$error.required">
 										Paid amount shouldn't be blank.
 										</span>
 										<span class = "help-block"
