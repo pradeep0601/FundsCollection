@@ -19,7 +19,7 @@
 <script type="text/javascript" src="resources/js/controller/userController.js"></script>
 <script type="text/javascript" src="resources/js/controller/registerController.js"></script>
 <script type="text/javascript" src="resources/js/service/userService.js"></script>
-<link href='http://fonts.googleapis.com/css?family=Yesteryear|Tillana|Allan' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Montserrat|Yesteryear|Tillana|Allan' rel='stylesheet' type='text/css'>
 <!-- <link rel="stylesheet" href="resources/css/bootstrap.min.css"> -->
 <!-- <link rel="stylesheet" href="resources/css/custom.css"> -->
 <!-- new scripts starts -->
@@ -31,7 +31,7 @@
 </head>
 <body id="parent" data-ng-app="userApp" bgcolor="grey" data-ng-controller="userController">
 
-<nav class="navbar navbar-default">	
+<nav class="navbar navbar-default navbar-fixed-top">	
 	<div class="container-fluid">
 		<div class="container">
 		<div class="col-md-3">
@@ -41,14 +41,15 @@
 					<span class="icon-bar"></span> 
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#"><img class="img-rounded" src="resources/images/Aricent_logo.png" alt="" style="width: 150px; height: 40px"></a>
+				<a class="navbar-brand" href="#"><img class="img-rounded" src="resources/images/FClogo.jpg" alt="" style="width: 150px; height: 40px"></a>
+				<!-- <a class="navbar-brand" href="#"><img class="img-rounded" src="resources/images/Aricent_logo.png" alt="" style="width: 150px; height: 40px"></a> -->
 			</div></div>
 		<div class="col-md-9">
-		<div class="collapse navbar-collapse" id="fundsNavbar">
+		<!-- <div class="collapse navbar-collapse" id="fundsNavbar">
 				FUNDS COLLECTION
 				<ul class="nav navbar-nav">
 					<li><a href="#aboutus">About Us</a></li>
-				</ul>
+				</ul> -->
 				<ul class="nav navbar-nav navbar-right">
 					<li><button type="button"
 							class="btn btn-default btn-lg btn-circle dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -71,9 +72,16 @@
 </body>
 
 <!-- Footer -->
-        <footer class="footer">
+         <footer class="footer">
       <div class="container">
-        <p class="text-muted">Copyright &copy; Aricent Technologies 2016</p>
-      </div>
+      			<a href="#">Home</a>
+				·
+				<a href="#about">About</a>
+				.
+				<a href="#contact">Contact</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <span class="text-muted">Copyright &copy; Aricent Technologies 2016</span>
+     
+     
+      
 </footer>
 </html>

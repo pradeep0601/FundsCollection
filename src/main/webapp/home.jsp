@@ -32,16 +32,18 @@
 <link rel="stylesheet" href="resources/css/custom.css">
 <link rel="stylesheet" href="resources/css/lib/fontsCSS/css/font-awesome.min.css">
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-<link href='http://fonts.googleapis.com/css?family=Montserrat|Yesteryear|Tillana|Allan' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Yesteryear|Tillana|Allan' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 </head>
 <body data-ng-app="fundsApp">
 
-	<nav class="navbar navbar-default">
+	<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid">
 	<div class="container">
 	<div class="col-md-3">
 		<div class="navbar-header">
-		  <a class="navbar-brand" href="https://www.aricent.com/"><img class="img-rounded" src="resources/images/Aricent_logo.png" alt="" style="width: 150px; height: 40px"></a>
+		  		  <a class="navbar-brand" href="#"><img class="img-rounded" src="resources/images/FClogo.jpg" alt="" style="width: 150px; height: 40px"></a>
+		  <!-- <a class="navbar-brand" href="https://www.aricent.com/"><img class="img-rounded" src="resources/images/Aricent_logo.png" alt="" style="width: 150px; height: 40px"></a> -->
 		</div>
 		</div>
 		<div class="col-md-9">
@@ -79,7 +81,14 @@
 
 <footer class="footer">
       <div class="container">
-        <p class="text-muted">Copyright &copy; Aricent Technologies 2016</p>
-      </div>
+      			<a href="#">Home</a>
+				·
+				<a href="#about">About</a>
+				.
+				<a href="#contact">Contact</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <span class="text-muted">Copyright &copy; Aricent Technologies 2016</span>
+     
+     
+      
 </footer>
 </html>
