@@ -1,95 +1,76 @@
 <div class="row container-fluid">
 	<div class="col-md-12">
-	<div class="row">
-		<div>
-			<marquee direction="right"><img src="resources/images/rupeeall.jpg" height="100" width="442"></marquee>
-		</div>
-	</div>
-	</div>
-	<div class="row">
-		<div class="col-md-6">
-			<div class="panel panel-primary">
-				<div class="panel-heading text-center">Fund Cycle Status</div>
-				<div class="panel-body">
-					<div class="col-md-12">
-						<div class="col-md-6">Start Date :</div>
-						<div class="col-md-6"></div>
-					</div>
-					<div class="col-md-12">
-						<div class="col-md-6">Amount/Person :</div>
-						<div class="col-md-6"></div>
-					</div>
-				</div>
-				<div class="panel-footer">
-
-					<div class="progress">
-						<div class="col-md-12">
-							<div class="col-md-2">Status :</div>
-							<div class="col-md-10">
-								<div class="progress-bar progress-bar-success progress-bar-striped active"
-									role="progressbar" aria-valuenow="100" aria-valuemin="0"
-									aria-valuemax="100" style="width: 100%">In Progress</div>
-							</div>
-						</div>
-					</div>
-
-				</div>
-			</div>
-		</div>
-		<div class="col-md-6">
-			<div class="panel panel-info">
-				<div class="panel-heading text-center">Birthday's in current month</div>
-				<div class="panel-body">
-				<ul>
-				<li>Pradeep : 06 January</li>
-				<li>Saurav : 06 January</li>
-				<li>Susil : 20 October</li>
-				</ul>
-				</div>
-				<div class="panel-footer"><a>View Details</a></div>
+		<div class="row">
+			<div>
+				<marquee direction="right">
+					<img src="resources/images/rupeeall.jpg" height="100" width="442">
+				</marquee>
 			</div>
 		</div>
 		<div class="row">
-		<div class="col-md-6">
-			<div class="panel panel-primary">
-				<div class="panel-heading text-center">Fund Cycle Status</div>
-				<div class="panel-body">
-					<div class="col-md-12">
-						<div class="col-md-6">Start Date :</div>
-						<div class="col-md-6"></div>
-					</div>
-					<div class="col-md-12">
-						<div class="col-md-6">Amount/Person :</div>
-						<div class="col-md-6"></div>
-					</div>
-				</div>
-				<div class="panel-footer">
-
-					<div class="progress">
-						<div class="col-md-12">
-							<div class="col-md-2">Status :</div>
-							<div class="col-md-10">
-								<div class="progress-bar progress-bar-success progress-bar-striped active"
-									role="progressbar" aria-valuenow="100" aria-valuemin="0"
-									aria-valuemax="100" style="width: 100%">In Progress</div>
-							</div>
+			<div class="col-md-6">
+				<div class="panel panel-info">
+					<div class="panel-heading text-center"><h4>Fund And Expenditure</h4></div>
+					<div class="panel-body">
+					<div class="table-responsive">
+							<table class="table table-hover">
+								<tbody>
+								<tr class = "warning">
+								<td>Fund Cycle Start Date</td>
+								<td>{{fundDetails.FUNDCYCLE.startDate | date : 'dd-MMM-y'}}</td>
+								</tr>
+								<tr class = "active">
+								<td>Fund Cycle End Date</td>
+								<td>{{fundDetails.FUNDCYCLE.endDate | date : 'dd-MMM-y'}}</td>
+								</tr>
+								<tr class = "warning">
+								<td>Total Collection</td>
+								<td><i class="fa fa-inr"></i> {{fundDetails.FUNDCYCLE.totalCollection}}</td>
+								</tr>
+								<tr class = "active">
+								<td>Total Expenditure</td>
+								<td><i class="fa fa-inr"></i> {{fundDetails.FUNDCYCLE.totalExpenditure}}</td>
+								</tr>
+								<tr class = "warning">
+								<td>Total Balance</td>
+								<td><i class="fa fa-inr"></i> {{fundDetails.FUNDCYCLE.totalBalance}}</td>
+								</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
-
+					<div class="panel-footer">
+						<a href="#fundsInfo">View Details</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-success">
+					<div class="panel-heading text-center"><h4>Birthday's In Current
+						Month</h4></div>
+					<div class="panel-body">
+						<div class="table-responsive">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+									   <th class = "text-center">Name</th>
+									   <th class = "text-center">Birthday</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr data-ng-repeat = "employee in fundDetails.BIRTHDAY_LIST">
+									   <td class = "text-center info">{{employee.firstName}}</td>
+									   <td class = "text-center danger">{{employee.dob | date : 'dd-MMMM'}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="panel-footer">
+						<a href="#empDetails">View Details</a>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col-md-6">
-			<div class="panel panel-info">
-				<div class="panel-heading text-center">Birthday's in current month</div>
-				<div class="panel-body">
-				<ul>
-				<li>Pradeep : 06 January</li>
-				<li>Saurav : 06 January</li>
-				<li>Susil : 20 October</li>
-				</ul>
-				</div>
-				<div class="panel-footer"><a>View Details</a></div>
-			</div>
-		</div>
+	</div>
 </div>

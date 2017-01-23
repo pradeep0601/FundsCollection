@@ -1,7 +1,7 @@
 'use strict';
 
 fundsApp.controller("fundsController", ["$scope","fundsService","$location",function($scope,fundsService,$location){
-
+	$scope.$parent.changeProgressBar();
 	$scope.fundsCycle = {"startDate" : "", "endDate" : "", "sharePerPerson" : ""};
 	$scope.startFundCycle = function (){
 		console.log($scope.fundsCycle);
@@ -50,6 +50,7 @@ fundsApp.controller("fundsController", ["$scope","fundsService","$location",func
 					newRecord.recordId = successResp;
 					$scope.fundDetails.PAIDFUNDRECORDS.push(newRecord);
 					$scope.fundDetails.FUNDCYCLE.totalBalance = +$scope.fundDetails.FUNDCYCLE.totalBalance + +newRecord.actualPaidAmount;
+					$scope.fundDetails.FUNDCYCLE.totalCollection = +$scope.fundDetails.FUNDCYCLE.totalCollection + +newRecord.actualPaidAmount;
 					$scope.fundDetails.FUNDRECORDS = $scope.fundDetails.FUNDRECORDS.filter(function(fr) {
 					    return fr.employee.userName !== newRecord.employee.userName;
 					});
@@ -120,6 +121,7 @@ fundsApp.controller("fundsController", ["$scope","fundsService","$location",func
 							$scope.fundDetails.PAIDFUNDRECORDS[i].payDate = updatedRecord.payDate;
 							var payDiff = updatedRecord.actualPaidAmount - $scope.fundDetails.PAIDFUNDRECORDS[i].actualPaidAmount;
 							$scope.fundDetails.FUNDCYCLE.totalBalance = +$scope.fundDetails.FUNDCYCLE.totalBalance + +payDiff;
+							$scope.fundDetails.FUNDCYCLE.totalCollection = +$scope.fundDetails.FUNDCYCLE.totalCollection + +payDiff;
 							$scope.fundDetails.PAIDFUNDRECORDS[i].actualPaidAmount = updatedRecord.actualPaidAmount;
 							break;
 						}
@@ -155,6 +157,7 @@ fundsApp.controller("fundsController", ["$scope","fundsService","$location",func
 									$scope.fundDetails.FUNDRECORDS.push(fundsRecord);
 									
 									$scope.fundDetails.FUNDCYCLE.totalBalance = +$scope.fundDetails.FUNDCYCLE.totalBalance - +$scope.fundDetails.PAIDFUNDRECORDS[i].actualPaidAmount;
+									$scope.fundDetails.FUNDCYCLE.totalCollection = +$scope.fundDetails.FUNDCYCLE.totalCollection - +$scope.fundDetails.PAIDFUNDRECORDS[i].actualPaidAmount;
 									
 									$scope.fundDetails.PAIDFUNDRECORDS.splice(i,1);
 									
@@ -267,6 +270,10 @@ fundsApp.controller("fundsController", ["$scope","fundsService","$location",func
 		}
 		
 	}	
+	//to sort
+	 $scope.orderBy = function(x){
+	    	$scope.myOrder = x;
+	    }
 }]);
 
 fundsApp.directive('ngReallyClick', [function() {
