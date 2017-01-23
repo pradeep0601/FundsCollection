@@ -25,6 +25,14 @@ app.config(function($routeProvider) {
 			templateUrl : "/FundsCollection/resources/html/error.html",
 			controller : "userController"
 		})
+		.when("/contact", {
+			templateUrl : "/FundsCollection/resources/html/contactUs.html",
+			controller : "fundsController"
+		})
+		.when("/about", {
+			templateUrl : "/FundsCollection/resources/html/aboutUs.html",
+			controller : "fundsController"
+		})
 		.otherwise({
 			redirectTo: "/welcome"
 		});

@@ -87,8 +87,6 @@
 				.
 				<a href="#contact">Contact</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
          <span class="text-muted">Copyright &copy; Aricent Technologies 2016</span>
-     
-     
-      
+     </div> 
 </footer>
 </html>
